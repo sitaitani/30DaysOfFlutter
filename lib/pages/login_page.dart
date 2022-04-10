@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/utils/routes.dart';
 
-Widget build(BuildContext context) {
-  return new MaterialApp(
-      home: new LoginPage(), theme: new ThemeData(primarySwatch: Colors.blue));
-}
-
 class LoginPage extends StatefulWidget {
   @override
-  State createState() => new LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage>
+class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _iconAnimationController;
   late Animation<double> _iconAnimation;
+
+  get fontSize => null;
+
+  get fontWeight => null;
 
   @override
   void initState() {
@@ -42,11 +41,22 @@ class LoginPageState extends State<LoginPage>
             color: Colors.black87,
             colorBlendMode: BlendMode.darken,
           ),
+          // ignore: unnecessary_new
           new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new FlutterLogo(
                 size: _iconAnimation.value * 100,
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              new Text(
+                "Welcome",
+                style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal),
               ),
               new Form(
                 child: new Theme(
