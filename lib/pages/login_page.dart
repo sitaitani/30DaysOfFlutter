@@ -8,6 +8,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
+  String name = "";
+  bool changeButon = false;
   late AnimationController _iconAnimationController;
   late Animation<double> _iconAnimation;
 
@@ -45,14 +47,18 @@ class _LoginPageState extends State<LoginPage>
           new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new FlutterLogo(
-                size: _iconAnimation.value * 100,
+              Image(
+                image: new AssetImage("assets/images/logo.jpg"),
+                height: 150,
+                fit: BoxFit.cover,
+
+                //    colorBlendMode: BlendMode.darken,
               ),
               const SizedBox(
                 height: 20.0,
               ),
               new Text(
-                "Welcome",
+                "Welcome $name",
                 style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -76,6 +82,10 @@ class _LoginPageState extends State<LoginPage>
                             hintText: "Enter Username",
                             labelText: "Username",
                           ),
+                          onChanged: (value) {
+                            name = value;
+                            setState(() {});
+                          },
                           keyboardType: TextInputType.emailAddress,
                         ),
                         new TextFormField(
@@ -89,17 +99,53 @@ class _LoginPageState extends State<LoginPage>
                         new Padding(
                           padding: const EdgeInsets.only(top: 40.0),
                         ),
-                        new MaterialButton(
-                          height: 40.0,
-                          minWidth: 150.0,
-                          color: Colors.teal,
-                          textColor: Colors.white,
-                          child: new Text("Login"),
-                          splashColor: Colors.purpleAccent,
-                          onPressed: () {
+                        InkWell(
+                          onTap: () async {
+                            setState(() {
+                              changeButon = true;
+                            });
+
+                            await Future.delayed(Duration(seconds: 1));
                             Navigator.pushNamed(context, MyRoutes.homeRoute);
                           },
-                        )
+                          child: AnimatedContainer(
+                            duration: Duration(seconds: 1),
+                            width: changeButon ? 50 : 150,
+                            height: 50,
+                            //color: Colors.greenAccent,
+                            alignment: Alignment.center,
+                            child: changeButon
+                                ? Icon(
+                                    Icons.done,
+                                    color: Colors.blue,
+                                  )
+                                : Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        color: Colors.brown,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                            decoration: BoxDecoration(
+                                color: Colors.tealAccent,
+                                // shape: changeButon
+                                //   ? BoxShape.circle
+                                // : BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(
+                                    changeButon ? 50 : 8)),
+                          ),
+                          //new MaterialButton(
+                          //height: 40.0,
+                          //minWidth: 150.0,
+                          //color: Colors.teal,
+                          //textColor: Colors.white,
+                          //child: new Text("Login"),
+                          //splashColor: Colors.purpleAccent,
+                          //onPressed: () {
+                          //},
+                          //)
+                        ),
+                        //),
                       ],
                     ),
                   ),
