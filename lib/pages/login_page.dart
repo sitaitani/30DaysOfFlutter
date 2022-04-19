@@ -99,51 +99,56 @@ class _LoginPageState extends State<LoginPage>
                         new Padding(
                           padding: const EdgeInsets.only(top: 40.0),
                         ),
-                        InkWell(
-                          onTap: () async {
-                            setState(() {
-                              changeButon = true;
-                            });
+                        Material(
+                          color: Color.fromARGB(255, 103, 72, 109),
+                          borderRadius:
+                              BorderRadius.circular(changeButon ? 50 : 8),
+                          child: InkWell(
+                            onTap: () async {
+                              setState(() {
+                                changeButon = true;
+                              });
 
-                            await Future.delayed(Duration(seconds: 1));
-                            Navigator.pushNamed(context, MyRoutes.homeRoute);
-                          },
-                          child: AnimatedContainer(
-                            duration: Duration(seconds: 1),
-                            width: changeButon ? 50 : 150,
-                            height: 50,
-                            //color: Colors.greenAccent,
-                            alignment: Alignment.center,
-                            child: changeButon
-                                ? Icon(
-                                    Icons.done,
-                                    color: Colors.blue,
-                                  )
-                                : Text(
-                                    "Login",
-                                    style: TextStyle(
-                                        color: Colors.brown,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  ),
-                            decoration: BoxDecoration(
-                                color: Colors.tealAccent,
-                                // shape: changeButon
-                                //   ? BoxShape.circle
-                                // : BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(
-                                    changeButon ? 50 : 8)),
+                              await Future.delayed(Duration(seconds: 1));
+                              await Navigator.pushNamed(
+                                  context, MyRoutes.homeRoute);
+                              setState(() {
+                                changeButon = false;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: Duration(seconds: 1),
+                              width: changeButon ? 50 : 150,
+                              height: 50,
+                              //color: Colors.greenAccent,
+                              alignment: Alignment.center,
+                              child: changeButon
+                                  ? Icon(
+                                      Icons.done,
+                                      color: Colors.blue,
+                                    )
+                                  : Text(
+                                      "Login",
+                                      style: TextStyle(
+                                          color: Colors.teal,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                              // shape: changeButon
+                              //   ? BoxShape.circle
+                              // : BoxShape.rectangle,
+                            ),
+                            //new MaterialButton(
+                            //height: 40.0,
+                            //minWidth: 150.0,
+                            //color: Colors.teal,
+                            //textColor: Colors.white,
+                            //child: new Text("Login"),
+                            //splashColor: Colors.purpleAccent,
+                            //onPressed: () {
+                            //},
+                            //)
                           ),
-                          //new MaterialButton(
-                          //height: 40.0,
-                          //minWidth: 150.0,
-                          //color: Colors.teal,
-                          //textColor: Colors.white,
-                          //child: new Text("Login"),
-                          //splashColor: Colors.purpleAccent,
-                          //onPressed: () {
-                          //},
-                          //)
                         ),
                         //),
                       ],
