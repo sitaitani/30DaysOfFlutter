@@ -28,6 +28,22 @@ class _LoginPageState extends State<LoginPage>
     _iconAnimationController.forward();
   }
 
+  final _formkey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    if (_formkey.currentState!.validate()) {
+      setState(() {
+        changeButon = true;
+      });
+
+      await Future.delayed(Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        changeButon = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -65,6 +81,7 @@ class _LoginPageState extends State<LoginPage>
                     color: Colors.teal),
               ),
               new Form(
+                key: _formkey,
                 child: new Theme(
                   data: new ThemeData(
                       brightness: Brightness.dark,
@@ -82,6 +99,12 @@ class _LoginPageState extends State<LoginPage>
                             hintText: "Enter Username",
                             labelText: "Username",
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Username cannot be empty";
+                            }
+                            return null;
+                          },
                           onChanged: (value) {
                             name = value;
                             setState(() {});
@@ -94,6 +117,14 @@ class _LoginPageState extends State<LoginPage>
                             hintText: "Enter Password",
                             labelText: "Password",
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Password cannot be empty";
+                            } else if (value.length < 8) {
+                              return "Password length should be atleast 8";
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.text,
                         ),
                         new Padding(
@@ -104,18 +135,7 @@ class _LoginPageState extends State<LoginPage>
                           borderRadius:
                               BorderRadius.circular(changeButon ? 50 : 8),
                           child: InkWell(
-                            onTap: () async {
-                              setState(() {
-                                changeButon = true;
-                              });
-
-                              await Future.delayed(Duration(seconds: 1));
-                              await Navigator.pushNamed(
-                                  context, MyRoutes.homeRoute);
-                              setState(() {
-                                changeButon = false;
-                              });
-                            },
+                            onTap: () => moveToHome(context),
                             child: AnimatedContainer(
                               duration: Duration(seconds: 1),
                               width: changeButon ? 50 : 150,
