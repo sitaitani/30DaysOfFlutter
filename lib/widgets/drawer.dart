@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/widgets/notification.dart';
 import 'package:flutter_application_2/widgets/readingmaterial.dart';
 import 'package:flutter_application_2/widgets/routine.dart';
 import 'package:flutter_application_2/widgets/webview.dart';
@@ -97,21 +98,22 @@ class MyDrawer extends StatelessWidget {
             //),
             //)),
             ListTile(
-                leading: Icon(
-                  CupertinoIcons.bell,
+              leading: Icon(
+                CupertinoIcons.bell,
+                color: Colors.black,
+              ),
+              title: Text(
+                "Notification",
+                textScaleFactor: 1.2,
+                style: TextStyle(
                   color: Colors.black,
                 ),
-                title: Text(
-                  "Notification",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                 onTap: () => {
+              ),
+              onTap: () => {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Notification()))
-              },),
+                    MaterialPageRoute(builder: (context) => NotificationList()))
+              },
+            ),
             ListTile(
                 leading: Icon(
                   CupertinoIcons.bus,
