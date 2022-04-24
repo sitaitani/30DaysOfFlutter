@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/widgets/readingmaterial.dart';
+import 'package:flutter_application_2/widgets/routine.dart';
 import 'package:flutter_application_2/widgets/webview.dart';
 import 'package:share_plus/share_plus.dart';
+
+import 'homework.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -30,65 +34,84 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-                leading: Icon(
-                  CupertinoIcons.create,
+              leading: Icon(
+                CupertinoIcons.create,
+                color: Colors.black,
+              ),
+              title: Text(
+                "Homework",
+                textScaleFactor: 1.2,
+                style: TextStyle(
                   color: Colors.black,
                 ),
-                title: Text(
-                  "Homework",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
+              ),
+              onTap: () => {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ListViewHomework()))
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                CupertinoIcons.calendar_today,
+                color: Colors.black,
+              ),
+              title: Text(
+                "Routine",
+                textScaleFactor: 1.2,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () => {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Routine()))
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                CupertinoIcons.book,
+                color: Colors.black,
+              ),
+              title: Text(
+                "Reading Material",
+                textScaleFactor: 1.2,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () => {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ReadingMaterial()))
+              },
+            ),
+            //ListTile(
+            //leading: Icon(
+            //CupertinoIcons.group_solid,
+            //color: Colors.black,
+            //),
+            //title: Text(
+            // "Material",
+            //textScaleFactor: 1.2,
+            //style: TextStyle(
+            //color: Colors.black,
+            //),
+            //)),
             ListTile(
                 leading: Icon(
-                  CupertinoIcons.calendar_today,
+                  CupertinoIcons.bell,
                   color: Colors.black,
                 ),
                 title: Text(
-                  "Routine",
+                  "Notification",
                   textScaleFactor: 1.2,
                   style: TextStyle(
                     color: Colors.black,
                   ),
-                )),
-            ListTile(
-                leading: Icon(
-                  CupertinoIcons.book,
-                  color: Colors.black,
                 ),
-                title: Text(
-                  "Reading",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
-            ListTile(
-                leading: Icon(
-                  CupertinoIcons.group_solid,
-                  color: Colors.black,
-                ),
-                title: Text(
-                  "Material",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
-            ListTile(
-                leading: Icon(
-                  CupertinoIcons.tv_music_note,
-                  color: Colors.black,
-                ),
-                title: Text(
-                  "Events",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
+                 onTap: () => {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Notification()))
+              },),
             ListTile(
                 leading: Icon(
                   CupertinoIcons.bus,
@@ -125,7 +148,7 @@ class MyDrawer extends StatelessWidget {
                     builder: (context) => WebviewExample(
                         url:
                             "https://sites.google.com/view/eschoolproject/privacypolicy",
-                        title: "About Us")))
+                        title: "Privacy Policy")))
               },
             ),
             ListTile(
