@@ -27,7 +27,7 @@ class _WebviewExampleState extends State<WebviewExample> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          backgroundColor: Color.fromRGBO(218, 55, 50, 1),
+          backgroundColor: Colors.teal,
         ),
         body: IndexedStack(index: position, children: <Widget>[
           WebView(
