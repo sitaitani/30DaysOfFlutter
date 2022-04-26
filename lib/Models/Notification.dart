@@ -27,6 +27,7 @@ void main() async {
     badge: true,
     sound: true,
   );
+}
 
 class NotificationData {
   String title = "";
