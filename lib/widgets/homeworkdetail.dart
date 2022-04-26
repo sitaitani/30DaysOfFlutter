@@ -24,5 +24,9 @@ class _HomeworkdetailState extends State<homeworkdetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: SfPdfViewer.asset('assets/pdf/dlassignment.pdf'));
+    return Scaffold(body: SfPdfViewer.asset('assets/pdf/AJP_Exam_Questions.pdf'));
+    return Scaffold(body: SfPdfViewer.asset('assets/pdf/C Assignments_updated.pdf'));
+    return Scaffold(body: SfPdfViewer.asset('assets/pdf/web tech nccs old question.pdf'));
+    //return Scaffold(body: SfPdfViewer.asset('assets/pdf/dlassignment.pdf'));
   }
 }

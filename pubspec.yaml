@@ -39,6 +39,8 @@ dependencies:
   webview_flutter:
   firebase_core: ^1.15.0
   firebase_database: ^9.0.9
+  firebase_messaging: ^11.2.14
+  flutter_local_notifications: ^9.4.1
 
   syncfusion_flutter_pdf: 20.1.50-beta
   path_provider: ^2.0.9

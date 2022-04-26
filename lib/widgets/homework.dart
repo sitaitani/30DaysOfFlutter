@@ -26,14 +26,18 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
       HomeworkData(
           "DL Assignment",
           // "Question 1, //Question 7 and Question of chapter 2",
-          "2022 Apr 28"),
+          "2022 Apr 20"),
       HomeworkData(
-          "Java", //"Question 1, Question 7 and Question of chapter 2",
-          "2022 Apr 27"),
+          "web tech nccs old question", //"Question 1, Question 7 and Question of chapter 2",
+          "2022 Apr 26"),
       HomeworkData(
-          "Communication",
+          "C Assignments_updated",
           //"Question 1, Question 7 and Question of chapter 2",
-          "2022 Apr 29"),
+          "2022 Apr 30"),
+          HomeworkData(
+          "AJP_Exam_Questions",
+          //"Question 1, Question 7 and Question of chapter 2",
+          "2022 May 03"),
     ];
 
     setState(() {
