@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/widgets/bustrack.dart';
 import 'package:flutter_application_2/widgets/notification.dart';
 import 'package:flutter_application_2/widgets/readingmaterial.dart';
 import 'package:flutter_application_2/widgets/routine.dart';
@@ -48,7 +49,7 @@ class MyDrawer extends StatelessWidget {
               ),
               onTap: () => {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ListViewHomework()))
+                    MaterialPageRoute(builder: (context) => ListviewHomework()))
               },
             ),
             ListTile(
@@ -115,17 +116,22 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-                leading: Icon(
-                  CupertinoIcons.bus,
+              leading: Icon(
+                CupertinoIcons.bus,
+                color: Colors.black,
+              ),
+              title: Text(
+                "Bus Tracking",
+                textScaleFactor: 1.2,
+                style: TextStyle(
                   color: Colors.black,
                 ),
-                title: Text(
-                  "Bus Tracking",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
+              ),
+              onTap: () => {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => bustrack()))
+              },
+            ),
             Divider(
               height: 10,
               thickness: 1,
