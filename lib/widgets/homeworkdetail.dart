@@ -1,7 +1,12 @@
+import 'dart:ffi';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Models/Homework.dart';
 import 'package:flutter_application_2/utils/Style.dart';
 import 'package:flutter_application_2/widgets/emptyWidget.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 //import '../Models/Notification.dart';
 
@@ -20,11 +25,13 @@ class _HomeworkdetailState extends State<homeworkdetail> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Homework Detail"),
-        ),
-        body: Text("Detail"));
-  }
+Widget build(BuildContext context) {
+  return Scaffold(
+      body: SfPdfViewer.asset(
+              'assets/DL Assignment.pdf'));
 }
+  }
+
+
+
+      

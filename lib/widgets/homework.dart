@@ -23,12 +23,17 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
 
   void testHomeworkData() {
     final testHomeworkData = [
-      HomeworkData("Mobile Programming",
-          "Question 1, Question 7 and Question of chapter 2", "2022 Apr 28"),
-      HomeworkData("Java", "Question 1, Question 7 and Question of chapter 2",
+      HomeworkData(
+          "DL Assignment",
+          // "Question 1, //Question 7 and Question of chapter 2",
+          "2022 Apr 28"),
+      HomeworkData(
+          "Java", //"Question 1, Question 7 and Question of chapter 2",
           "2022 Apr 27"),
-      HomeworkData("Communication",
-          "Question 1, Question 7 and Question of chapter 2", "2022 Apr 29"),
+      HomeworkData(
+          "Communication",
+          //"Question 1, Question 7 and Question of chapter 2",
+          "2022 Apr 29"),
     ];
 
     setState(() {

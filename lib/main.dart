@@ -7,6 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+
+
+//import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

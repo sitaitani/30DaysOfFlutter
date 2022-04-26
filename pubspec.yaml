@@ -40,6 +40,10 @@ dependencies:
   firebase_core: ^1.15.0
   firebase_database: ^9.0.9
 
+  syncfusion_flutter_pdf: 20.1.50-beta
+  path_provider: ^2.0.9
+  open_file: ^3.2.1
+  syncfusion_flutter_pdfviewer: ^20.1.50-beta
 
 dev_dependencies:
   flutter_test:

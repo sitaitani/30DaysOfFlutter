@@ -22,12 +22,18 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
 
   void testReadingMaterial() {
     final testReadingMaterials = [
-      ReadingMaterialData("Mobile Programming - Note",
-          "Chapter 1, Chapter 2 and Chapter 3 Notes", "http://www.africau.edu/images/default/sample.pdf"),
-      ReadingMaterialData("Mobile Programming - Important Questions",
-          "Important questions for upcoming exam", "http://www.africau.edu/images/default/sample.pdf"),
       ReadingMaterialData(
-          "Mobile Programming - Old Question", "Old Question of 2078", "http://www.africau.edu/images/default/sample.pdf")
+          "Mobile Programming - Note",
+          "Chapter 1, Chapter 2 and Chapter 3 Notes",
+          "http://www.africau.edu/images/default/sample.pdf"),
+      ReadingMaterialData(
+          "Mobile Programming - Important Questions",
+          "Important questions for upcoming exam",
+          "http://www.africau.edu/images/default/sample.pdf"),
+      ReadingMaterialData(
+          "Mobile Programming - Old Question",
+          "Old Question of 2078",
+          "http://www.africau.edu/images/default/sample.pdf")
     ];
 
     setState(() {
@@ -55,12 +61,10 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                           Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => WebviewExample(
-                        url:
-                            readingMaterialList[index].link,
-                        title: readingMaterialList[index].title)));
-                      
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => WebviewExample(
+                                url: readingMaterialList[index].link,
+                                title: readingMaterialList[index].title)));
                       },
                       child: Card(
                           child: Padding(
@@ -87,13 +91,14 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
                                                   readingMaterialList[index]
                                                       .title,
                                                   style: Style.titleStyle,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   maxLines: 2,
                                                 ),
                                               ],
                                             ),
                                           ),
-                    
+
                                           Icon(
                                             Icons.chevron_right_outlined,
                                             color: Colors.teal,
@@ -101,7 +106,7 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
                                         ],
                                       ),
                                     ),
-                    
+
                                     //* Scroe
                                   ],
                                 ),
