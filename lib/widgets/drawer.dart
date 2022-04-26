@@ -110,10 +110,10 @@ class MyDrawer extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              onTap: () => {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => NotificationList()))
-              },
+              //onTap: () => {
+               // Navigator.of(context).push(
+                    //MaterialPageRoute(builder: (context) => NotificationList()))
+              //},
             ),
             ListTile(
               leading: Icon(

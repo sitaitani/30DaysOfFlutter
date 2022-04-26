@@ -25,15 +25,18 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
       ReadingMaterialData(
           "Mobile Programming - Note",
           "Chapter 1, Chapter 2 and Chapter 3 Notes",
-          "http://www.africau.edu/images/default/sample.pdf"),
+          //"http://www.africau.edu/images/default/sample.pdf"
+          ),
       ReadingMaterialData(
           "Mobile Programming - Important Questions",
           "Important questions for upcoming exam",
-          "http://www.africau.edu/images/default/sample.pdf"),
+          //"http://www.africau.edu/images/default/sample.pdf"
+          ),
       ReadingMaterialData(
           "Mobile Programming - Old Question",
           "Old Question of 2078",
-          "http://www.africau.edu/images/default/sample.pdf")
+        //http://www.africau.edu/images/default/sample.pdf"
+        )
     ];
 
     setState(() {
