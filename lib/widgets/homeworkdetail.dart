@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Models/Homework.dart';
 import 'package:flutter_application_2/utils/Style.dart';
@@ -25,13 +22,7 @@ class _HomeworkdetailState extends State<homeworkdetail> {
   }
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-      body: SfPdfViewer.asset(
-              'assets/DL Assignment.pdf'));
-}
+  Widget build(BuildContext context) {
+    return Scaffold(body: SfPdfViewer.asset('assets/pdf/dlassignment.pdf'));
   }
-
-
-
-      
+}
