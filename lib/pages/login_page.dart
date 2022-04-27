@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/pages/register.dart';
 import 'package:flutter_application_2/utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
@@ -46,6 +47,7 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unnecessary_new
     return new Scaffold(
       backgroundColor: Colors.greenAccent,
       body: new Stack(
@@ -73,13 +75,13 @@ class _LoginPageState extends State<LoginPage>
               const SizedBox(
                 height: 20.0,
               ),
-              new Text(
-                "Welcome $name",
-                style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal),
-              ),
+              // new Text(
+              // "Welcome $name",
+              // style: TextStyle(
+              // fontSize: 28,
+              //  fontWeight: FontWeight.bold,
+              //color: Colors.teal),
+              // ),
               new Form(
                 key: _formkey,
                 child: new Theme(
@@ -91,14 +93,16 @@ class _LoginPageState extends State<LoginPage>
                               color: Colors.teal, fontSize: 20.0))),
                   child: new Container(
                     padding: const EdgeInsets.all(40.0),
+                    // ignore: unnecessary_new
                     child: new Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         new TextFormField(
                           decoration: InputDecoration(
-                            hintText: "Enter Username",
-                            labelText: "Username",
-                          ),
+                              hintText: "Enter Username",
+                              labelText: "Username",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Username cannot be empty";
@@ -111,12 +115,16 @@ class _LoginPageState extends State<LoginPage>
                           },
                           keyboardType: TextInputType.emailAddress,
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         new TextFormField(
                           obscureText: true,
                           decoration: new InputDecoration(
-                            hintText: "Enter Password",
-                            labelText: "Password",
-                          ),
+                              hintText: "Enter Password",
+                              labelText: "Password",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Password cannot be empty";
@@ -129,6 +137,9 @@ class _LoginPageState extends State<LoginPage>
                         ),
                         new Padding(
                           padding: const EdgeInsets.only(top: 40.0),
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
                         Material(
                           color: Color.fromARGB(255, 103, 72, 109),
@@ -154,22 +165,38 @@ class _LoginPageState extends State<LoginPage>
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18),
                                     ),
-                              // shape: changeButon
-                              //   ? BoxShape.circle
-                              // : BoxShape.rectangle,
                             ),
-                            //new MaterialButton(
-                            //height: 40.0,
-                            //minWidth: 150.0,
-                            //color: Colors.teal,
-                            //textColor: Colors.white,
-                            //child: new Text("Login"),
-                            //splashColor: Colors.purpleAccent,
-                            //onPressed: () {
-                            //},
-                            //)
                           ),
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, 'register');
+                              },
+                              child: Text('sign Up',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 18,
+                                      color: Colors.teal),
+                                      onTap: () => {
+                                      Navigator.of(context).push(
+                                     MaterialPageRoute(builder: (context) => Myregister()))
+                                      },
+                                      ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('Forgot Password',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 18,
+                                      color: Colors.teal)),
+                            ),
+                          ],
+                        ),
+                        //),
                         //),
                       ],
                     ),
