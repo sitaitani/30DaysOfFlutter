@@ -199,6 +199,7 @@ final TextEditingController passwordController = new TextEditingController();
                         SizedBox(
                           height: 20,
                         ),
+                        
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[

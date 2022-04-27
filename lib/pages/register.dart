@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/pages/login_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Myregister extends StatefulWidget {
   const Myregister({Key? key}) : super(key: key);
@@ -11,17 +14,31 @@ class Myregister extends StatefulWidget {
 class _MyRegisterState extends State<Myregister> {
   final _auth = FirebaseAuth.instance;
 
+String? errorMessage;
+
+
+  get changeButon => null;
+  final _formKey = GlobalKey<FormState>();
+
+  
+  // editing Controller
+  final firstNameEditingController = new TextEditingController();
+  final secondNameEditingController = new TextEditingController();
+  final emailEditingController = new TextEditingController();
+  final passwordEditingController = new TextEditingController();
+  final confirmPasswordEditingController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/register.png'), fit: BoxFit.cover),
-      ),
+          // image: DecorationImage(
+          //image: AssetImage('assets/images/register.png'), fit: BoxFit.cover),
+          ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.black,
           elevation: 0,
         ),
         body: Stack(
@@ -45,12 +62,12 @@ class _MyRegisterState extends State<Myregister> {
                       child: Column(
                         children: [
                           TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: Colors.black12,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
@@ -78,12 +95,12 @@ class _MyRegisterState extends State<Myregister> {
                             height: 10,
                           ),
                           TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: Colors.black12,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
@@ -108,12 +125,12 @@ class _MyRegisterState extends State<Myregister> {
                             height: 10,
                           ),
                           TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: Colors.black12,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
@@ -144,13 +161,13 @@ class _MyRegisterState extends State<Myregister> {
                             height: 10,
                           ),
                           TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             obscureText: true,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: Colors.black12,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
@@ -178,13 +195,13 @@ class _MyRegisterState extends State<Myregister> {
                             height: 10,
                           ),
                           TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             obscureText: true,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: Colors.black12,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
@@ -199,39 +216,37 @@ class _MyRegisterState extends State<Myregister> {
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                             validator: (value) {
-                              //  if (confirmPasswordEditingController.text !=
-                              //    passwordEditingController.text) {
-                              //     return "Password don't match";
-                              //     }
+                              if (confirmPasswordEditingController.text !=
+                                  passwordEditingController.text) {
+                                return "Password don't match";
+                              }
                               return null;
                             },
                           ),
-                          SizedBox(
-                            height: 40,
+                          new Padding(
+                            padding: const EdgeInsets.only(top: 40.0),
                           ),
-                          TextField(
-                            style: TextStyle(color: Colors.white),
-                            textAlign: TextAlign.center,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                //fillColor: Color.fromARGB(255, 103, 72, 109),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                  ),
-                                ),
-                                hintText: "Sign UP",
-                                hintStyle: TextStyle(color: Colors.teal),
-                                //Alignment: Alignment.bottomCenter,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Material(
+                            elevation: 5,
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color.fromARGB(255, 103, 72, 109),
+                            child: MaterialButton(
+                                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                minWidth: MediaQuery.of(context).size.width,
+                                onPressed: () {
+                                  signUp(emailEditingController.text,
+                                      passwordEditingController.text);
+                                },
+                                child: Text(
+                                  "SignUp",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 )),
                           ),
                         ],
@@ -246,4 +261,72 @@ class _MyRegisterState extends State<Myregister> {
       ),
     );
   }
-}
+
+  void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()})
+            .catchError((e) {
+          Fluttertoast.showToast(msg: e!.message);
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Your email address appears to be malformed.";
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          default:
+            errorMessage = "An undefined Error happened.";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+    }
+  }
+  postDetailsToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sedning these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserModel usermodel = UserModel();
+
+    // writing all the values
+    // ignore: prefer_typing_uninitialized_variables
+    var userModel;
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.firstName = firstNameEditingController.text;
+    userModel.secondName = secondNameEditingController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => LoginPage()),
+        (route) => false);
+  }
+
+  
