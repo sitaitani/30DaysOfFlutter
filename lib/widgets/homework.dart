@@ -26,18 +26,18 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
       HomeworkData(
           "DL Assignment",
           // "Question 1, //Question 7 and Question of chapter 2",
-          "2022 Apr 20"),
+          "2022-04-20"),
       HomeworkData(
           "web tech nccs old question", //"Question 1, Question 7 and Question of chapter 2",
-          "2022 Apr 26"),
+          "2022-04-27"),
       HomeworkData(
           "C Assignments_updated",
           //"Question 1, Question 7 and Question of chapter 2",
-          "2022 Apr 30"),
+          "2022-04-30"),
           HomeworkData(
           "AJP_Exam_Questions",
           //"Question 1, Question 7 and Question of chapter 2",
-          "2022 May 03"),
+          "2022-05-03"),
     ];
 
     setState(() {
@@ -114,8 +114,18 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                                 ),
                               ),
                               Text(
+
+                                
                                 "Deadline: " + homeworkdataList[index].deadline,
-                                style: Style.normalContentStyle,
+                                style: TextStyle(
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+    fontSize: 16.0,
+    color: isDeadlinedPassed(homeworkdataList[index].deadline) == "same" ? Color.fromARGB(254, 168, 82, 1): 
+    isDeadlinedPassed(homeworkdataList[index].deadline) == "passed" ? Colors.red : 
+    Colors.black,
+    height: 1.3,
+  ),          
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
@@ -127,5 +137,28 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                   }),
             ),
     );
+  }
+
+  String isDeadlinedPassed(String deadlineDate) {
+    final deadlinedDate = DateTime.parse(deadlineDate);
+
+    final currentDate = DateTime.now();
+
+print(deadlinedDate);
+print(currentDate);
+    if (deadlinedDate.isSameDate(currentDate)) {
+      return "same";
+    } else if (deadlinedDate.compareTo(currentDate) <= 0) {
+      return "passed";
+    }
+    return "none";
+  }
+}
+
+
+extension DateOnlyCompare on DateTime {
+  bool isSameDate(DateTime other) {
+    return year == other.year && month == other.month
+           && day == other.day;
   }
 }
