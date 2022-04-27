@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Models/User.dart';
 import 'package:flutter_application_2/widgets/bustrack.dart';
 import 'package:flutter_application_2/widgets/notification.dart';
 import 'package:flutter_application_2/widgets/readingmaterial.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_application_2/widgets/routine.dart';
 import 'package:flutter_application_2/widgets/webview.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../pages/login_page.dart';
 import 'homework.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -28,10 +31,10 @@ class MyDrawer extends StatelessWidget {
                 margin: EdgeInsets.zero,
 
                 /// decoration: BoxDecoration(color: Colors.teal),
-                accountName: Text("Sita Itani"),
-                accountEmail: Text("sitaitani99@gmail.com"),
+               accountName: Text(userInformation.name),
+                accountEmail: Text(FirebaseAuth.instance.currentUser?.email ?? ""),
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/sita.jpg"),
+                  backgroundImage: AssetImage("assets/images/user.png"),
                 ),
               ),
             ),
@@ -208,7 +211,16 @@ class MyDrawer extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.black,
                   ),
-                )),
+                ),
+                 onTap: () => {
+                   FirebaseAuth.instance.signOut(),
+                   Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => LoginPage()))
+
+                   
+
+                 }
+                 ),
           ],
         ),
       ),

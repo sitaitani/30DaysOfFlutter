@@ -47,8 +47,9 @@ class _LoginPageState extends State<LoginPage>
       });
     }
   }
-final TextEditingController emailController = new TextEditingController();
-final TextEditingController passwordController = new TextEditingController();
+
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
 
 //firebase
   final _auth = FirebaseAuth.instanceFor;
@@ -107,7 +108,7 @@ final TextEditingController passwordController = new TextEditingController();
                       children: <Widget>[
                         new TextFormField(
                           autofocus: false,
-                           controller: emailController,
+                          controller: emailController,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.mail),
                               contentPadding:
@@ -117,21 +118,22 @@ final TextEditingController passwordController = new TextEditingController();
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10))),
                           //controller: emailController,
-                         keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.emailAddress,
                           validator: (value) {
-                          if (value!.isEmpty) {
-                          return ("Please Enter Your Email");
-                                }
-                               // reg expression for email validation
-                             if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                             .hasMatch(value)) {
-                             return ("Please Enter a valid email");
-                              }
+                            if (value!.isEmpty) {
+                              return ("Please Enter Your Email");
+                            }
+                            // reg expression for email validation
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                .hasMatch(value)) {
+                              return ("Please Enter a valid email");
+                            }
                             return null;
-                             },
-                            onSaved: (value) {
-                           emailController.text = value!;
-                             },
+                          },
+                          onSaved: (value) {
+                            emailController.text = value!;
+                          },
                         ),
                         SizedBox(
                           height: 20,
@@ -148,19 +150,18 @@ final TextEditingController passwordController = new TextEditingController();
                               // labelText: "Password",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10))),
-                                  validator: (value) {
-                                  RegExp regex = new RegExp(r'^.{6,}$');
-                                  if (value!.isEmpty) {
-                                   return ("Password is required for login");
-                                    }
-                                   if (!regex.hasMatch(value)) {
-                                   return ("Enter Valid Password(Min. 6 Character)");
-                                    }
-                                       },
-                                  onSaved: (value) {
-                                    passwordController.text = value!;
-                                        },
-
+                          validator: (value) {
+                            RegExp regex = new RegExp(r'^.{6,}$');
+                            if (value!.isEmpty) {
+                              return ("Password is required for login");
+                            }
+                            if (!regex.hasMatch(value)) {
+                              return ("Enter Valid Password(Min. 6 Character)");
+                            }
+                          },
+                          onSaved: (value) {
+                            passwordController.text = value!;
+                          },
                           keyboardType: TextInputType.text,
                         ),
                         new Padding(
@@ -174,7 +175,7 @@ final TextEditingController passwordController = new TextEditingController();
                           borderRadius:
                               BorderRadius.circular(changeButon ? 50 : 8),
                           child: InkWell(
-                            onTap: () => moveToHome(context),
+                            onTap: () => login(),
                             child: AnimatedContainer(
                               duration: Duration(seconds: 1),
                               width: changeButon ? 50 : 150,
@@ -199,7 +200,7 @@ final TextEditingController passwordController = new TextEditingController();
                         SizedBox(
                           height: 20,
                         ),
-                        
+
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -239,5 +240,20 @@ final TextEditingController passwordController = new TextEditingController();
       ),
     );
   }
-}
 
+  void login() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => Homepage()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+          Fluttertoast.showToast(msg: 'No user registered for given email');
+      } else if (e.code == 'wrong-password') {
+        Fluttertoast.showToast(msg: 'Invalid password');
+      }
+    }
+  }
+}

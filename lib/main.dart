@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Models/User.dart';
 import 'package:flutter_application_2/pages/home_page.dart';
 import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/pages/register.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+
     // TODO: implement initState
     var initializationSettingsAndroid =
         new AndroidInitializationSettings('ic_launcher');
@@ -101,7 +103,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes.homeRoute,
+      initialRoute: FirebaseAuth.instance.currentUser == null ? MyRoutes.loginRoute : MyRoutes.homeRoute,
       routes: {
         "/": (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => Homepage(),
@@ -110,4 +112,6 @@ class _MyAppState extends State<MyApp> {
       },
     );
   }
+
+  
 }
