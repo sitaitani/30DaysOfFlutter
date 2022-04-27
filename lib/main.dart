@@ -1,15 +1,16 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Models/Notification.dart';
 import 'package:flutter_application_2/pages/home_page.dart';
 import 'package:flutter_application_2/pages/login_page.dart';
+import 'package:flutter_application_2/utils/Constants.dart';
 import 'package:flutter_application_2/utils/routes.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_application_2/utils/DatabaseHelper.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:intl/intl.dart';
 
-import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 
 //import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -57,6 +58,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+
+    handleNotificationEvents();
     // TODO: implement initState
     var initializationSettingsAndroid =
         new AndroidInitializationSettings('ic_launcher');
@@ -71,6 +74,12 @@ class _MyAppState extends State<MyApp> {
       AndroidNotification? android = message.notification?.android;
 
 
+
+    globalNotificationList.insert(0, 
+        NotificationData(notification?.title ?? "Title", notification?.body ?? "Description",  DateFormat('yyyy-MM-dd').format(DateTime.now()))
+    );
+
+    handleUpcomingNotification();
       
       if (notification != null && android != null) {
         flutterLocalNotificationsPlugin.show(
@@ -112,5 +121,24 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.loginRoute: (context) => LoginPage()
       },
     );
+  }
+
+  void handleNotificationEvents() async {
+
+      DatabaseHandler.db.retrieveNotifications().then((value) => {
+        if (value.isEmpty) {
+          globalNotificationList = [
+              NotificationData("Invitation for 35th Anniversary", "We on the behalf of KSMC invites you to the 35th anniversary program of the college on Baisakh 20.", "2022-04-05"),
+              NotificationData("Happy New Year 2079", "We wish you happy new year for 2079. May this year gives you immense pleasure", "2022-04-01"),
+              NotificationData("Account created successfully", "Congratulations! you have successfully created your account. Enjyoy benefits of eSchool.", "2022-01-01"),
+          ]
+        } else {
+          globalNotificationList = value 
+        }
+        });
+  }
+
+  void handleUpcomingNotification() async {
+    DatabaseHandler.db.insertNotification(globalNotificationList);
   }
 }

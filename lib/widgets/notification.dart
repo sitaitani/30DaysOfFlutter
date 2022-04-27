@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/utils/Constants.dart';
  import 'package:flutter_application_2/utils/Style.dart';
  import 'package:flutter_application_2/widgets/emptyWidget.dart';
 
@@ -18,18 +19,12 @@ import 'package:flutter/material.dart';
    void initState() {
      // TODO: implement initState
      super.initState();
-     testNotifion();
+     addNotification();
    }
 
-   void testNotifion() {
-     final testNotifications = [
-       NotificationData("Account created successfully", "Congratulations! you have successfully created your account. Enjyoy benefits of eSchool."),
-       NotificationData("Happy New Year 2079", "We wish you happy new year for 2079. May this year gives you immense pleasure"),
-       NotificationData("Iniviation for 35th Anniversary", "We on the behalf of KSMC invites you to the 35th anniversary program of the college on Baisakh 20."),
-     ];
-
+   void addNotification() {
      setState(() {
-       notificationList = testNotifications;
+       notificationList = globalNotificationList;
      });
    }
 
@@ -66,7 +61,7 @@ import 'package:flutter/material.dart';
                                    style: Style.titleStyle
                                  ),
                                ),
-                               Text("2022/01/01"),
+                               Text(notificationList[index].date),
                              ],
                            ),
                            SizedBox(
