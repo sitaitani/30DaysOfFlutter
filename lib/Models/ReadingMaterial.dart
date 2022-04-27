@@ -4,7 +4,7 @@ class ReadingMaterialData {
   String description = "";
   String fileName = "";
 
-  ReadingMaterialData(String title, String description, //String link
+  ReadingMaterialData(String title, String description, String fileName
   ) 
   {
     this.title = title;

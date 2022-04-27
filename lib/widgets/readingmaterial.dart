@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/utils/Style.dart';
+import 'package:flutter_application_2/widgets/readingmaterialdetail.dart';
 import 'package:flutter_application_2/widgets/webview.dart';
 
 import '../Models/ReadingMaterial.dart';
@@ -23,20 +24,23 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
   void testReadingMaterial() {
     final testReadingMaterials = [
       ReadingMaterialData(
-          "Mobile Programming - Note",
-          "Chapter 1, Chapter 2 and Chapter 3 Notes",
-          //"http://www.africau.edu/images/default/sample.pdf"
-          ),
+        "Advanced Java - Notes",
+        "Chapter 1 and Chapter 2 Notes",
+        "Advanced_java"
+        //"http://www.africau.edu/images/default/sample.pdf"
+      ),
       ReadingMaterialData(
-          "Mobile Programming - Important Questions",
-          "Important questions for upcoming exam",
-          //"http://www.africau.edu/images/default/sample.pdf"
-          ),
+        "Applied Economics - Notes",
+        "chapter 1 and chapter 2 Notes",
+        "Applied_economics"
+        //"http://www.africau.edu/images/default/sample.pdf"
+      ),
       ReadingMaterialData(
-          "Mobile Programming - Old Question",
-          "Old Question of 2078",
+        "Distributed System - Notes",
+        "chapter 1, chapter 2, chapter 3, chapter 4 and chapter 5 Notes",
+        "distributed_system"
         //http://www.africau.edu/images/default/sample.pdf"
-        )
+      ),
     ];
 
     setState(() {
@@ -65,9 +69,8 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
                     return GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => WebviewExample(
-                                url: readingMaterialList[index].link,
-                                title: readingMaterialList[index].title)));
+                            builder: (context) =>readingMaterialDetail(
+fileName: readingMaterialList[index].fileName)));
                       },
                       child: Card(
                           child: Padding(
