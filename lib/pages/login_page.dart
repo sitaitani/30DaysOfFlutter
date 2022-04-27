@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/pages/home_page.dart';
 import 'package:flutter_application_2/pages/register.dart';
 import 'package:flutter_application_2/utils/routes.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -44,6 +47,11 @@ class _LoginPageState extends State<LoginPage>
       });
     }
   }
+final TextEditingController emailController = new TextEditingController();
+final TextEditingController passwordController = new TextEditingController();
+
+//firebase
+  final _auth = FirebaseAuth.instanceFor;
 
   @override
   Widget build(BuildContext context) {
@@ -98,41 +106,61 @@ class _LoginPageState extends State<LoginPage>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         new TextFormField(
+                          autofocus: false,
+                           controller: emailController,
                           decoration: InputDecoration(
-                              hintText: "Enter Username",
-                              labelText: "Username",
+                              prefixIcon: Icon(Icons.mail),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20, 15, 20, 15),
+                              hintText: "Enter Email",
+                              //labelText: "Email",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10))),
+                          //controller: emailController,
+                         keyboardType: TextInputType.emailAddress,
                           validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Username cannot be empty";
-                            }
+                          if (value!.isEmpty) {
+                          return ("Please Enter Your Email");
+                                }
+                               // reg expression for email validation
+                             if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                             .hasMatch(value)) {
+                             return ("Please Enter a valid email");
+                              }
                             return null;
-                          },
-                          onChanged: (value) {
-                            name = value;
-                            setState(() {});
-                          },
-                          keyboardType: TextInputType.emailAddress,
+                             },
+                            onSaved: (value) {
+                           emailController.text = value!;
+                             },
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         new TextFormField(
+                          autofocus: false,
+                          controller: passwordController,
                           obscureText: true,
                           decoration: new InputDecoration(
+                              prefixIcon: Icon(Icons.vpn_key),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20, 15, 20, 15),
                               hintText: "Enter Password",
-                              labelText: "Password",
+                              // labelText: "Password",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10))),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Password cannot be empty";
-                            } else if (value.length < 8) {
-                              return "Password length should be atleast 8";
-                            }
-                            return null;
-                          },
+                                  validator: (value) {
+                                  RegExp regex = new RegExp(r'^.{6,}$');
+                                  if (value!.isEmpty) {
+                                   return ("Password is required for login");
+                                    }
+                                   if (!regex.hasMatch(value)) {
+                                   return ("Enter Valid Password(Min. 6 Character)");
+                                    }
+                                       },
+                                  onSaved: (value) {
+                                    passwordController.text = value!;
+                                        },
+
                           keyboardType: TextInputType.text,
                         ),
                         new Padding(
@@ -168,34 +196,35 @@ class _LoginPageState extends State<LoginPage>
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, 'register');
-                              },
-                              child: Text('sign Up',
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      fontSize: 18,
-                                      color: Colors.teal),
-                                      onTap: () => {
-                                      Navigator.of(context).push(
-                                     MaterialPageRoute(builder: (context) => Myregister()))
-                                      },
-                                      ),
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text('Forgot Password',
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      fontSize: 18,
-                                      color: Colors.teal)),
-                            ),
-                          ],
+                        SizedBox(
+                          height: 20,
                         ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Don't have an account?",
+                                style: TextStyle(
+                                    color: Colors.teal,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Myregister()));
+                                },
+                                child: Text(
+                                  "SignUp",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              )
+                            ])
                         //),
                         //),
                       ],
@@ -210,3 +239,4 @@ class _LoginPageState extends State<LoginPage>
     );
   }
 }
+

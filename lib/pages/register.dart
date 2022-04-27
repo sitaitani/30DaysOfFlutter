@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Myregister extends StatefulWidget {
@@ -8,12 +9,14 @@ class Myregister extends StatefulWidget {
 }
 
 class _MyRegisterState extends State<Myregister> {
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/register.png'), fit: BoxFit.cover),
+            image: AssetImage('assets/images/register.png'), fit: BoxFit.cover),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -24,16 +27,16 @@ class _MyRegisterState extends State<Myregister> {
         body: Stack(
           children: [
             Container(
-              padding: EdgeInsets.only(left: 35, top: 30),
+              padding: EdgeInsets.only(left: 35, top: 25),
               child: Text(
-                'Create\nAccount',
-                style: TextStyle(color: Colors.white, fontSize: 33),
+                'Create Account',
+                style: TextStyle(color: Colors.teal, fontSize: 33),
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.28),
+                    top: MediaQuery.of(context).size.height * 0.20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -41,7 +44,7 @@ class _MyRegisterState extends State<Myregister> {
                       margin: EdgeInsets.only(left: 35, right: 35),
                       child: Column(
                         children: [
-                          TextField(
+                          TextFormField(
                             style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -56,16 +59,55 @@ class _MyRegisterState extends State<Myregister> {
                                     color: Colors.black,
                                   ),
                                 ),
-                                hintText: "Name",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintText: "First Name",
+                                hintStyle: TextStyle(color: Colors.teal),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            validator: (value) {
+                              RegExp regex = new RegExp(r'^.{3,}$');
+                              if (value!.isEmpty) {
+                                return ("First Name cannot be Empty");
+                              }
+                              if (!regex.hasMatch(value)) {
+                                return ("Enter Valid name(Min. 3 Character)");
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Last Name",
+                                hintStyle: TextStyle(color: Colors.teal),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return ("Last Name cannot be Empty");
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
-                          TextField(
+                          TextFormField(
                             style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -81,15 +123,27 @@ class _MyRegisterState extends State<Myregister> {
                                   ),
                                 ),
                                 hintText: "Email",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: TextStyle(color: Colors.teal),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return ("Please Enter Your Email");
+                              }
+                              // reg expression for email validation
+                              if (!RegExp(
+                                      "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                  .hasMatch(value)) {
+                                return ("Please Enter a valid email");
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
-                          TextField(
+                          TextFormField(
                             style: TextStyle(color: Colors.white),
                             obscureText: true,
                             decoration: InputDecoration(
@@ -106,58 +160,80 @@ class _MyRegisterState extends State<Myregister> {
                                   ),
                                 ),
                                 hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: TextStyle(color: Colors.teal),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                            validator: (value) {
+                              RegExp regex = new RegExp(r'^.{6,}$');
+                              if (value!.isEmpty) {
+                                return ("Password is required for login");
+                              }
+                              if (!regex.hasMatch(value)) {
+                                return ("Enter Valid Password(Min. 6 Character)");
+                              }
+                            },
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            style: TextStyle(color: Colors.white),
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Confirm Password",
+                                hintStyle: TextStyle(color: Colors.teal),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                            validator: (value) {
+                              //  if (confirmPasswordEditingController.text !=
+                              //    passwordEditingController.text) {
+                              //     return "Password don't match";
+                              //     }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          TextField(
+                            style: TextStyle(color: Colors.white),
+                            textAlign: TextAlign.center,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                //fillColor: Color.fromARGB(255, 103, 72, 109),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                                hintText: "Sign UP",
+                                hintStyle: TextStyle(color: Colors.teal),
+                                //Alignment: Alignment.bottomCenter,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                           ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 27,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: Color(0xff4c505b),
-                                child: IconButton(
-                                    color: Colors.white,
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.arrow_forward,
-                                    )),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, 'login');
-                                },
-                                child: Text(
-                                  'Sign In',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.white,
-                                      fontSize: 18),
-                                ),
-                                style: ButtonStyle(),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     )

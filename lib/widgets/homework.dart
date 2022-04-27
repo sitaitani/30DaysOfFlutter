@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/utils/Style.dart';
 import 'package:flutter_application_2/widgets/homeworkdetail.dart';
@@ -18,6 +19,9 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    testRegistration();
+
     testHomeworkData();
   }
 
@@ -34,7 +38,7 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
           "C Assignments_updated",
           //"Question 1, Question 7 and Question of chapter 2",
           "2022 Apr 30"),
-          HomeworkData(
+      HomeworkData(
           "AJP_Exam_Questions",
           //"Question 1, Question 7 and Question of chapter 2",
           "2022 May 03"),
@@ -127,5 +131,23 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                   }),
             ),
     );
+  }
+
+  void testRegistration() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: "barry.allen@example.com",
+              password: "SuperSecretPassword!");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print("REGISTRATION ERROR");
+      print(e);
+    }
   }
 }

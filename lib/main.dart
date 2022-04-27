@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/pages/home_page.dart';
@@ -12,7 +13,6 @@ import 'package:firebase_database/firebase_database.dart';
 
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
-
 //import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -26,12 +26,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
- 
+
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
@@ -48,14 +48,13 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-    
+
 class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -66,7 +65,7 @@ class _MyAppState extends State<MyApp> {
     var initializationSettings =
         InitializationSettings(android: initialzationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
- 
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
@@ -79,7 +78,7 @@ class _MyAppState extends State<MyApp> {
               android: AndroidNotificationDetails(
                 channel.id,
                 channel.name,
-                
+
                 color: Colors.blue,
                 // TODO add a proper drawable resource to android, for now using
                 //      one that already exists in example app.
@@ -89,7 +88,6 @@ class _MyAppState extends State<MyApp> {
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +106,7 @@ class _MyAppState extends State<MyApp> {
         "/": (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => Homepage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
-        MyRoutes.registerRoute:(context) => Myregister()
+        MyRoutes.registerRoute: (context) => Myregister()
       },
     );
   }
