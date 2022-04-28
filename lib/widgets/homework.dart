@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/utils/Constants.dart';
 import 'package:flutter_application_2/utils/Style.dart';
 import 'package:flutter_application_2/widgets/homeworkdetail.dart';
+import 'package:flutter_application_2/widgets/routineTile.dart';
 import 'package:flutter_application_2/widgets/webview.dart';
+import 'package:intl/intl.dart';
 
 import '../Models/Homework.dart';
 import 'emptyWidget.dart';
@@ -17,6 +20,7 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
 
   @override
   void initState() {
+    getCurrentClass();
     // TODO: implement initState
     super.initState();
     testHomeworkData();
@@ -34,7 +38,7 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
           "web_tech_nccs_old_question"),
       HomeworkData(
           "C Assignmnet ",
-          "2022-04-28",
+          "2022-04-29",
           "C_Assignments_updated"),
       HomeworkData(
           "AJP Exam Questions",
@@ -155,9 +159,44 @@ print(currentDate);
     }
     return "none";
   }
+
+
+    void getCurrentClass() {
+    void changeTabSelection() {
+      final weekDay = DateFormat('EEEE').format(DateTime.now());
+  
+  List<Routine> routineList = [];
+  switch (weekDay) {
+    case "Sunday":
+    routineList = sundayRoutine;
+    break;
+    case "Monday":
+    routineList = mondayRoutine;
+    break;
+    case "Tuesday":
+    routineList = tuesdayRoutine;
+    break;
+    case "Wednesday":
+    routineList = wednesdayRoutine;
+    break;
+    case "Thursday":
+    routineList = thursdayRoutine;
+    break;
+    case "Friday":
+    routineList = fridayRoutine;
+    break;
+  }
+
+  final time = DateFormat('kk:mm:ss').format(DateTime.now());
+  print(time);
+
+  // routineList.forEach((element) {
+  //  final classStartTime = DateTime.parse(element.startTime);//element.startTime; 
+  //  print(classStartTime);
+  //  final classEndTime = element.endTime;
+  // });
+  }}
 }
-
-
 
 extension DateOnlyCompare on DateTime {
   bool isSameDate(DateTime other) {

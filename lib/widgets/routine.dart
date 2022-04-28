@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/utils/Constants.dart';
 import 'package:flutter_application_2/widgets/routineTile.dart';
 import 'package:intl/intl.dart';
 
@@ -14,60 +15,7 @@ class _RoutinePageState extends State<RoutinePage>
   late TabController _tabController;
 
 
-List<Routine> sundayRoutine = [
-  Routine("Mobile Programming", "6:20 am to 7:10 am", "Kiran Poudel"),
-  Routine("Network Programming", "7:10 am to 8:00 am", "Binod Paneru"),
-  Routine("Network Programming", "8:00 am to 8:50 am", "ABC"),
-  Routine("BREAK", "8:50 am to 9:20 am", ""),
-  Routine("Java2", "9:20 am to 10:10 am", "ABC"),
-  Routine("Mobile Programming", "6:30 am to 9:00 am", "ABC"),
-];
 
-List<Routine> mondayRoutine = [
-  Routine("Mobile Programming", "6:20 am to 7:10  am", "ABC"),
-  Routine("Network Programming", "7:10 am to 8:00 am", "ABC"),
-  Routine("Network Programming", "8:00 am to 8:50 am", "ABC"),
-  Routine("BREAK", "8:50 am to 9:20 am", ""),
-  Routine("Java2", "9:20 am to 10:10 am", "ABC"),
-  Routine("Mobile Programming", "6:30 am to 9:00 am", "ABC"),
-];
-
-List<Routine> tuesdayRoutine = [
-  Routine("Mobile Programming", "6:20 am to 7:10  am", "ABC"),
-  Routine("Network Programming", "7:10 am to 8:00 am", "ABC"),
-  Routine("Network Programming", "8:00 am to 8:50 am", "ABC"),
-  Routine("BREAK", "8:50 am to 9:20 am", ""),
-  Routine("Java2", "9:20 am to 10:10 am", "ABC"),
-  Routine("Mobile Programming", "6:30 am to 9:00 am", "ABC"),
-  Routine("Mobile Programming", "6:30 am to 9:00 am", "ABC"),
-];
-
-List<Routine> wednesdayRoutine = [
-  Routine("Mobile Programming", "6:20 am to 7:10  am", "ABC"),
- Routine("Network Programming", "7:10 am to 8:00 am", "ABC"),
-  Routine("Network Programming", "8:00 am to 8:50 am", "ABC"),
-  Routine("BREAK", "8:50 am to 9:20 am", ""),
-  Routine("Java2", "9:20 am to 10:10 am", "ABC"),
-  Routine("Mobile Programming", "6:30 am to 9:00 am", "ABC"),
-];
-
-List<Routine> thursdayRoutine = [
-  Routine("Network Programming", "6:20 am to 7:10  am", "ABC"),
- Routine("Network Programming", "7:10 am to 8:00 am", "ABC"),
-  Routine("Network Programming", "8:00 am to 8:50 am", "ABC"),
-  Routine("BREAK", "8:50 am to 9:20 am", ""),
-  Routine("Java2", "9:20 am to 10:10 am", "ABC"),
-  Routine("Mobile Programming", "6:30 am to 9:00 am", "ABC"),
-];
-
-List<Routine> fridayRoutine = [
-  Routine("Network Programming", "6:20 am to 7:10  am", "ABC"),
-  Routine("Network Programming", "7:10 am to 8:00 am", "ABC"),
-  Routine("Network Programming", "8:00 am to 8:50 am", "ABC"),
-  Routine("BREAK", "8:50 am to 9:20 am", ""),
-  Routine("Java2", "9:20 am to 10:10 am", "ABC"),
-  Routine("Mobile Programming", "6:30 am to 9:00 am", "ABC"),
-];
 
   @override
   void initState() {

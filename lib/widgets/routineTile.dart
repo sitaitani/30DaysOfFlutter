@@ -4,13 +4,15 @@ import 'package:flutter_application_2/utils/Style.dart';
 
 class Routine {
   String subjectName = "";
-  String time = "";
+  String startTime = "";
   String teacherName = "";
+  String endTime = "";
 
-  Routine(String subjectName, String time, String teacherName) {
+  Routine(String subjectName, String startTime, String teacherName, String endTime) {
     this.subjectName = subjectName;
-    this.time = time;
+    this.startTime = startTime;
     this.teacherName = teacherName;
+    this.endTime = endTime;
   }
 }
 
@@ -68,7 +70,7 @@ class _RoutileTileState extends State<RoutileTile> {
    children: <Widget>[
      Icon(CupertinoIcons.clock, color: Colors.teal, size: 20,),
      SizedBox(width: 5),
-     Text(widget.routine.time,
+     Text(widget.routine.startTime + "-"+widget.routine.endTime,
                       style: Style.routineTextStyle,
                       textAlign: TextAlign.justify)
    ]
