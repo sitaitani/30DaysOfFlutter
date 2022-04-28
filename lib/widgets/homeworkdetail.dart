@@ -8,12 +8,16 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 //import '../Models/Notification.dart';
 
 class homeworkdetail extends StatefulWidget {
+  const homeworkdetail({Key? key, required this.fileName})
+      : super(key: key);
+
+      final String fileName;
+
   @override
   State<homeworkdetail> createState() => _HomeworkdetailState();
 }
 
 class _HomeworkdetailState extends State<homeworkdetail> {
-  List<HomeworkData> homeworklist = [];
 
   @override
   void initState() {
@@ -21,12 +25,8 @@ class _HomeworkdetailState extends State<homeworkdetail> {
     super.initState();
   }
 
-  @override
+   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SfPdfViewer.asset('assets/pdf/dlassignment.pdf'));
-    return Scaffold(body: SfPdfViewer.asset('assets/pdf/AJP_Exam_Questions.pdf'));
-    return Scaffold(body: SfPdfViewer.asset('assets/pdf/C Assignments_updated.pdf'));
-    return Scaffold(body: SfPdfViewer.asset('assets/pdf/web tech nccs old question.pdf'));
-    //return Scaffold(body: SfPdfViewer.asset('assets/pdf/dlassignment.pdf'));
+    return Scaffold(body: SfPdfViewer.asset('assets/pdf/'+widget.fileName+'.pdf'));
   }
 }

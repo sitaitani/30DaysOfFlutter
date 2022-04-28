@@ -27,19 +27,16 @@ class _ReadingMaterialState extends State<ReadingMaterial> {
         "Advanced Java - Notes",
         "Chapter 1 and Chapter 2 Notes",
         "Advanced_java"
-        //"http://www.africau.edu/images/default/sample.pdf"
       ),
       ReadingMaterialData(
         "Applied Economics - Notes",
         "chapter 1 and chapter 2 Notes",
         "Applied_economics"
-        //"http://www.africau.edu/images/default/sample.pdf"
       ),
       ReadingMaterialData(
         "Distributed System - Notes",
         "chapter 1, chapter 2, chapter 3, chapter 4 and chapter 5 Notes",
         "distributed_system"
-        //http://www.africau.edu/images/default/sample.pdf"
       ),
     ];
 

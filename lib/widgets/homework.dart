@@ -19,9 +19,6 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    testRegistration();
-
     testHomeworkData();
   }
 
@@ -29,19 +26,20 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
     final testHomeworkData = [
       HomeworkData(
           "DL Assignment",
-          // "Question 1, //Question 7 and Question of chapter 2",
-          "2022 Apr 20"),
+          "2022-04-20",
+          "dlassignment"),
+      HomeworkData (
+          "web tech nccs old question", 
+          "2022-04-26",
+          "web_tech_nccs_old_question"),
       HomeworkData(
-          "web tech nccs old question", //"Question 1, Question 7 and Question of chapter 2",
-          "2022 Apr 26"),
+          "C Assignmnet ",
+          "2022-04-28",
+          "C_Assignments_updated"),
       HomeworkData(
-          "C Assignments_updated",
-          //"Question 1, Question 7 and Question of chapter 2",
-          "2022 Apr 30"),
-      HomeworkData(
-          "AJP_Exam_Questions",
-          //"Question 1, Question 7 and Question of chapter 2",
-          "2022 May 03"),
+          "AJP Exam Questions",
+          "2022-05-03",
+          "AJP_Exam_Questions"),
     ];
 
     setState(() {
@@ -70,7 +68,7 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                     return GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => homeworkdetail()));
+                            builder: (context) => homeworkdetail(fileName: homeworkdataList[index].fileName,)));
                       },
                       child: Card(
                           child: Padding(
@@ -118,8 +116,18 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                                 ),
                               ),
                               Text(
+
+                                
                                 "Deadline: " + homeworkdataList[index].deadline,
-                                style: Style.normalContentStyle,
+                                style: TextStyle(
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+    fontSize: 16.0,
+    color: isDeadlinedPassed(homeworkdataList[index].deadline) == "same" ? Color.fromARGB(254, 168, 82, 1): 
+    isDeadlinedPassed(homeworkdataList[index].deadline) == "passed" ? Colors.red : 
+    Colors.black,
+    height: 1.3,
+  ),          
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
@@ -133,21 +141,27 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
     );
   }
 
-  void testRegistration() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: "barry.allen@example.com",
-              password: "SuperSecretPassword!");
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print("REGISTRATION ERROR");
-      print(e);
+  String isDeadlinedPassed(String deadlineDate) {
+    final deadlinedDate = DateTime.parse(deadlineDate);
+
+    final currentDate = DateTime.now();
+
+print(deadlinedDate);
+print(currentDate);
+    if (deadlinedDate.isSameDate(currentDate)) {
+      return "same";
+    } else if (deadlinedDate.compareTo(currentDate) <= 0) {
+      return "passed";
     }
+    return "none";
+  }
+}
+
+
+
+extension DateOnlyCompare on DateTime {
+  bool isSameDate(DateTime other) {
+    return year == other.year && month == other.month
+           && day == other.day;
   }
 }

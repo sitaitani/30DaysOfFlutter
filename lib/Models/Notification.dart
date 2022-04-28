@@ -53,5 +53,4 @@ class NotificationData {
       };
 }
 
-
 List<NotificationData> globalNotificationList = [];
