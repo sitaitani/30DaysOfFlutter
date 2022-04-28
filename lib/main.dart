@@ -5,6 +5,7 @@ import 'package:flutter_application_2/Models/User.dart';
 import 'package:flutter_application_2/pages/home_page.dart';
 import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/pages/register.dart';
+import 'package:flutter_application_2/utils/DatabaseHelper.dart';
 import 'package:flutter_application_2/utils/routes.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -71,6 +72,13 @@ class _MyAppState extends State<MyApp> {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
+
+      //  globalNotificationList.insert(0, 
+      //   NotificationData(notification?.title ?? "Title", notification?.body ?? "Description",  DateFormat('yyyy-MM-dd').format(DateTime.now()))
+    // );
+
+    // handleUpcomingNotification();
+
       if (notification != null && android != null) {
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
@@ -113,5 +121,23 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+// void handleNotificationEvents() async {
+
+//       DatabaseHandler.db.retrieveNotifications().then((value) => {
+//         if (value.isEmpty) {
+//           globalNotificationList = [
+//               NotificationData("Invitation for 35th Anniversary", "We on the behalf of KSMC invites you to the 35th anniversary program of the college on Baisakh 20.", "2022-04-05"),
+//               NotificationData("Happy New Year 2079", "We wish you happy new year for 2079. May this year gives you immense pleasure", "2022-04-01"),
+//               NotificationData("Account created successfully", "Congratulations! you have successfully created your account. Enjyoy benefits of eSchool.", "2022-01-01"),
+//           ]
+//         } else {
+//           globalNotificationList = value 
+//         }
+//         });
+//   }
+
+//   void handleUpcomingNotification() async {
+//     DatabaseHandler.db.insertNotification(globalNotificationList);
+//   }
   
 }

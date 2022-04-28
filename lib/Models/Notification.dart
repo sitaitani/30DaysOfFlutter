@@ -32,19 +32,26 @@ void main() async {
 class NotificationData {
   String title = "";
   String description = "";
+  String date = "";
 
-  NotificationData(String title, String description) {
+  NotificationData(String title, String description, String date) {
     this.title = title;
     this.description = description;
+    this.date = date;
   }
 
   NotificationData.fromJson(Map<dynamic, dynamic> json) {
     title = json['title'] as String;
     description = json['description'] as String;
+    date = json["date"] as String;
   }
 
   Map<String, Object> toJson() => <String, Object>{
         'title': title,
         'description': description,
+        'date': date,
       };
 }
+
+
+List<NotificationData> globalNotificationList = [];

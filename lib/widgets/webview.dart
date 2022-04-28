@@ -47,7 +47,7 @@ class _WebviewExampleState extends State<WebviewExample> {
           Container(
             child: Center(
                 child: CircularProgressIndicator(
-              color: Colors.red,
+              color: Colors.teal,
             )),
           ),
         ]));

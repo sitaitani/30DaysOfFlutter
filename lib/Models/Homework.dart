@@ -2,7 +2,6 @@
 import '';
 class HomeworkData {
   String subject = "";
-  //String description = "";
   String deadline = "";
 
   HomeworkData(String subject, //String description,

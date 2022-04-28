@@ -69,7 +69,7 @@ class MyDrawer extends StatelessWidget {
               ),
               onTap: () => {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Routine()))
+                    .push(MaterialPageRoute(builder: (context) => RoutinePage()))
               },
             ),
             ListTile(

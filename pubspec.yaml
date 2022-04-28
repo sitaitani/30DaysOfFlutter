@@ -49,7 +49,8 @@ dependencies:
   path_provider: ^2.0.9
   open_file: ^3.2.1
   syncfusion_flutter_pdfviewer: ^20.1.50-beta
-
+  sqflite:
+  intl:
 dev_dependencies:
   flutter_test:
     sdk: flutter

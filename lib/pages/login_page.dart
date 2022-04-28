@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     // ignore: unnecessary_new
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.greenAccent,
       body: new Stack(
         fit: StackFit.expand,
@@ -71,170 +72,172 @@ class _LoginPageState extends State<LoginPage>
             colorBlendMode: BlendMode.darken,
           ),
           // ignore: unnecessary_new
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image(
-                image: new AssetImage("assets/images/logo.jpg"),
-                height: 150,
-                fit: BoxFit.cover,
+          Expanded(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image(
+                  image: new AssetImage("assets/images/logo.jpg"),
+                  height: 150,
+                  fit: BoxFit.cover,
 
-                //    colorBlendMode: BlendMode.darken,
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              // new Text(
-              // "Welcome $name",
-              // style: TextStyle(
-              // fontSize: 28,
-              //  fontWeight: FontWeight.bold,
-              //color: Colors.teal),
-              // ),
-              new Form(
-                key: _formkey,
-                child: new Theme(
-                  data: new ThemeData(
-                      brightness: Brightness.dark,
-                      primarySwatch: Colors.teal,
-                      inputDecorationTheme: new InputDecorationTheme(
-                          labelStyle: new TextStyle(
-                              color: Colors.teal, fontSize: 20.0))),
-                  child: new Container(
-                    padding: const EdgeInsets.all(40.0),
-                    // ignore: unnecessary_new
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        new TextFormField(
-                          autofocus: false,
-                          controller: emailController,
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.mail),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(20, 15, 20, 15),
-                              hintText: "Enter Email",
-                              //labelText: "Email",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                          //controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return ("Please Enter Your Email");
-                            }
-                            // reg expression for email validation
-                            if (!RegExp(
-                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                .hasMatch(value)) {
-                              return ("Please Enter a valid email");
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            emailController.text = value!;
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        new TextFormField(
-                          autofocus: false,
-                          controller: passwordController,
-                          obscureText: true,
-                          decoration: new InputDecoration(
-                              prefixIcon: Icon(Icons.vpn_key),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(20, 15, 20, 15),
-                              hintText: "Enter Password",
-                              // labelText: "Password",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                          validator: (value) {
-                            RegExp regex = new RegExp(r'^.{6,}$');
-                            if (value!.isEmpty) {
-                              return ("Password is required for login");
-                            }
-                            if (!regex.hasMatch(value)) {
-                              return ("Enter Valid Password(Min. 6 Character)");
-                            }
-                          },
-                          onSaved: (value) {
-                            passwordController.text = value!;
-                          },
-                          keyboardType: TextInputType.text,
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 40.0),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Material(
-                          color: Color.fromARGB(255, 103, 72, 109),
-                          borderRadius:
-                              BorderRadius.circular(changeButon ? 50 : 8),
-                          child: InkWell(
-                            onTap: () => login(),
-                            child: AnimatedContainer(
-                              duration: Duration(seconds: 1),
-                              width: changeButon ? 50 : 150,
-                              height: 50,
-                              //color: Colors.greenAccent,
-                              alignment: Alignment.center,
-                              child: changeButon
-                                  ? Icon(
-                                      Icons.done,
-                                      color: Colors.blue,
-                                    )
-                                  : Text(
-                                      "Login",
-                                      style: TextStyle(
-                                          color: Colors.teal,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
+                  //    colorBlendMode: BlendMode.darken,
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                // new Text(
+                // "Welcome $name",
+                // style: TextStyle(
+                // fontSize: 28,
+                //  fontWeight: FontWeight.bold,
+                //color: Colors.teal),
+                // ),
+                new Form(
+                  key: _formkey,
+                  child: new Theme(
+                    data: new ThemeData(
+                        brightness: Brightness.dark,
+                        primarySwatch: Colors.teal,
+                        inputDecorationTheme: new InputDecorationTheme(
+                            labelStyle: new TextStyle(
+                                color: Colors.teal, fontSize: 20.0))),
+                    child: new Container(
+                      padding: const EdgeInsets.all(40.0),
+                      // ignore: unnecessary_new
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          new TextFormField(
+                            autofocus: false,
+                            controller: emailController,
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.mail),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                hintText: "Enter Email",
+                                //labelText: "Email",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            //controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return ("Please Enter Your Email");
+                              }
+                              // reg expression for email validation
+                              if (!RegExp(
+                                      "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                  .hasMatch(value)) {
+                                return ("Please Enter a valid email");
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              emailController.text = value!;
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          new TextFormField(
+                            autofocus: false,
+                            controller: passwordController,
+                            obscureText: true,
+                            decoration: new InputDecoration(
+                                prefixIcon: Icon(Icons.vpn_key),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                hintText: "Enter Password",
+                                // labelText: "Password",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            validator: (value) {
+                              RegExp regex = new RegExp(r'^.{6,}$');
+                              if (value!.isEmpty) {
+                                return ("Password is required for login");
+                              }
+                              if (!regex.hasMatch(value)) {
+                                return ("Enter Valid Password(Min. 6 Character)");
+                              }
+                            },
+                            onSaved: (value) {
+                              passwordController.text = value!;
+                            },
+                            keyboardType: TextInputType.text,
+                          ),
+                          new Padding(
+                            padding: const EdgeInsets.only(top: 40.0),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Material(
+                            color: Color.fromARGB(255, 103, 72, 109),
+                            borderRadius:
+                                BorderRadius.circular(changeButon ? 50 : 8),
+                            child: InkWell(
+                              onTap: () => login(),
+                              child: AnimatedContainer(
+                                duration: Duration(seconds: 1),
+                                width: changeButon ? 50 : 150,
+                                height: 50,
+                                //color: Colors.greenAccent,
+                                alignment: Alignment.center,
+                                child: changeButon
+                                    ? Icon(
+                                        Icons.done,
+                                        color: Colors.blue,
+                                      )
+                                    : Text(
+                                        "Login",
+                                        style: TextStyle(
+                                            color: Colors.teal,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                          SizedBox(
+                            height: 20,
+                          ),
 
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Don't have an account?",
-                                style: TextStyle(
-                                    color: Colors.teal,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Myregister()));
-                                },
-                                child: Text(
-                                  "SignUp",
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Don't have an account?",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.teal,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 15),
+                                      fontSize: 18),
                                 ),
-                              )
-                            ])
-                        //),
-                        //),
-                      ],
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Myregister()));
+                                  },
+                                  child: Text(
+                                    "SignUp",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
+                                )
+                              ])
+                          //),
+                          //),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

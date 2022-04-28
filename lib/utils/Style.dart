@@ -46,4 +46,11 @@ static final normalTitleStyle = TextStyle(
     fontSize: 16.0,
     height: 1.3,
   );
+
+   static final routineTextStyle = TextStyle(
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+    fontSize: 17.0,
+    height: 1.3,
+  );
 }
