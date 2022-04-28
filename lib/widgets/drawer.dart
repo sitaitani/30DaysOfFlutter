@@ -31,8 +31,9 @@ class MyDrawer extends StatelessWidget {
                 margin: EdgeInsets.zero,
 
                 /// decoration: BoxDecoration(color: Colors.teal),
-               accountName: Text(userInformation.name),
-                accountEmail: Text(FirebaseAuth.instance.currentUser?.email ?? ""),
+                accountName: Text(userInformation.name),
+                accountEmail:
+                    Text(FirebaseAuth.instance.currentUser?.email ?? ""),
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: AssetImage("assets/images/user.png"),
                 ),
@@ -68,8 +69,8 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () => {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => RoutinePage()))
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => RoutinePage()))
               },
             ),
             ListTile(
@@ -212,15 +213,11 @@ class MyDrawer extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                 onTap: () => {
-                   FirebaseAuth.instance.signOut(),
-                   Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => LoginPage()))
-
-                   
-
-                 }
-                 ),
+                onTap: () => {
+                      FirebaseAuth.instance.signOut(),
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => LoginPage()))
+                    }),
           ],
         ),
       ),

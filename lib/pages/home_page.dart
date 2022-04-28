@@ -8,16 +8,15 @@ import '../widgets/drawer.dart';
 import '../widgets/routineTile.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-
 class Homepage extends StatefulWidget {
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  final int days = 30;
+  //final int days = 30;
 
-  final String name = "codepur";
+  final String name = "";
 
   @override
   void initState() {
@@ -29,11 +28,13 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Catelog App"),
+        title: Text("eSchool"),
       ),
-      body: Center(
-        child: Container(
-          child: Text("Welcome to $days days of Flutter by $name"),
+      body: Container(
+        child: Text(
+          "Welcome All",
+          style: TextStyle(
+              color: Colors.teal, fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
       drawer: MyDrawer(),

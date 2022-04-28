@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image(
-                  image: new AssetImage("assets/images/logo.jpg"),
+                  image: new AssetImage("assets/images/logo1.jpg"),
                   height: 150,
                   fit: BoxFit.cover,
 

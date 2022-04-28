@@ -16,13 +16,11 @@ class Myregister extends StatefulWidget {
 class _MyRegisterState extends State<Myregister> {
   final _auth = FirebaseAuth.instance;
 
-String? errorMessage;
-
+  String? errorMessage;
 
   get changeButon => null;
   final _formKey = GlobalKey<FormState>();
 
-  
   // editing Controller
   final firstNameEditingController = new TextEditingController();
   final secondNameEditingController = new TextEditingController();
@@ -270,42 +268,46 @@ String? errorMessage;
 
   void signUp(String email, String password) async {
     // if (_formKey.currentState?.validate() ?? false) {
-      try {
-        await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {
-              FirebaseDatabase.instance.ref().child('/users').push().set({'name': firstNameEditingController.text + " " + secondNameEditingController.text, 'uid': value.user?.uid ?? ""}).then((value) => 
-                  Navigator.of(context)
+    try {
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {
+                FirebaseDatabase.instance.ref().child('/users').push().set({
+                  'name': firstNameEditingController.text +
+                      " " +
+                      secondNameEditingController.text,
+                  'uid': value.user?.uid ?? ""
+                }).then((value) => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => Homepage())))
-            })
-            .catchError((e) {
-          Fluttertoast.showToast(msg: e!.message);
-        });
-      } on FirebaseAuthException catch (error) {
-        switch (error.code) {
-          case "invalid-email":
-            errorMessage = "Your email address appears to be malformed.";
-            break;
-          case "wrong-password":
-            errorMessage = "Your password is wrong.";
-            break;
-          case "user-not-found":
-            errorMessage = "User with this email doesn't exist.";
-            break;
-          case "user-disabled":
-            errorMessage = "User with this email has been disabled.";
-            break;
-          case "too-many-requests":
-            errorMessage = "Too many requests";
-            break;
-          case "operation-not-allowed":
-            errorMessage = "Signing in with Email and Password is not enabled.";
-            break;
-          default:
-            errorMessage = "An undefined Error happened.";
-        }
-        Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    } on FirebaseAuthException catch (error) {
+      switch (error.code) {
+        case "invalid-email":
+          errorMessage = "Your email address appears to be malformed.";
+          break;
+        case "wrong-password":
+          errorMessage = "Your password is wrong.";
+          break;
+        case "user-not-found":
+          errorMessage = "User with this email doesn't exist.";
+          break;
+        case "user-disabled":
+          errorMessage = "User with this email has been disabled.";
+          break;
+        case "too-many-requests":
+          errorMessage = "Too many requests";
+          break;
+        case "operation-not-allowed":
+          errorMessage = "Signing in with Email and Password is not enabled.";
+          break;
+        default:
+          errorMessage = "An undefined Error happened.";
+      }
+      Fluttertoast.showToast(msg: errorMessage!);
+      print(error.code);
       // }
     }
   }
