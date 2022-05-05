@@ -38,7 +38,8 @@ class _MyRegisterState extends State<Myregister> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.teal,
+          title: Text("SignUp"),
           elevation: 0,
         ),
         body: Stack(
@@ -52,8 +53,8 @@ class _MyRegisterState extends State<Myregister> {
             ),
             SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.20),
+                padding: EdgeInsets.only(top: 90),
+                //top: MediaQuery.of(context).size.height * 0.20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

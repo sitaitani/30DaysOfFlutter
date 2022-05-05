@@ -207,7 +207,7 @@ class _LoginPageState extends State<LoginPage>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "Don't have an account?",
+                                  "Don't have an account? ",
                                   style: TextStyle(
                                       color: Colors.teal,
                                       fontWeight: FontWeight.bold,
@@ -218,7 +218,8 @@ class _LoginPageState extends State<LoginPage>
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Myregister()));
+                                            builder: (context) =>
+                                                Myregister()));
                                   },
                                   child: Text(
                                     "SignUp",
@@ -253,7 +254,7 @@ class _LoginPageState extends State<LoginPage>
           .push(MaterialPageRoute(builder: (context) => Homepage()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-          Fluttertoast.showToast(msg: 'No user registered for given email');
+        Fluttertoast.showToast(msg: 'No user registered for given email');
       } else if (e.code == 'wrong-password') {
         Fluttertoast.showToast(msg: 'Invalid password');
       }
