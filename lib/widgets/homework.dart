@@ -28,22 +28,11 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
 
   void testHomeworkData() {
     final testHomeworkData = [
-      HomeworkData(
-          "DL Assignment",
-          "2022-04-20",
-          "dlassignment"),
-      HomeworkData (
-          "web tech nccs old question", 
-          "2022-04-26",
+      HomeworkData("DL Assignment", "2022-04-20", "dlassignment"),
+      HomeworkData("web tech nccs old question", "2022-04-26",
           "web_tech_nccs_old_question"),
-      HomeworkData(
-          "C Assignmnet ",
-          "2022-04-29",
-          "C_Assignments_updated"),
-      HomeworkData(
-          "AJP Exam Questions",
-          "2022-05-03",
-          "AJP_Exam_Questions"),
+      HomeworkData("C Assignmnet ", "2022-04-29", "C_Assignments_updated"),
+      HomeworkData("AJP Exam Questions", "2022-05-03", "AJP_Exam_Questions"),
     ];
 
     setState(() {
@@ -72,7 +61,9 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                     return GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => homeworkdetail(fileName: homeworkdataList[index].fileName,)));
+                            builder: (context) => homeworkdetail(
+                                  fileName: homeworkdataList[index].fileName,
+                                )));
                       },
                       child: Card(
                           child: Padding(
@@ -120,18 +111,24 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                                 ),
                               ),
                               Text(
-
-                                
                                 "Deadline: " + homeworkdataList[index].deadline,
                                 style: TextStyle(
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.normal,
-    fontSize: 16.0,
-    color: isDeadlinedPassed(homeworkdataList[index].deadline) == "same" ? Color.fromARGB(254, 168, 82, 1): 
-    isDeadlinedPassed(homeworkdataList[index].deadline) == "passed" ? Colors.red : 
-    Colors.black,
-    height: 1.3,
-  ),          
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16.0,
+                                  color: isDeadlinedPassed(
+                                              homeworkdataList[index]
+                                                  .deadline) ==
+                                          "same"
+                                      ? Color.fromARGB(254, 168, 82, 1)
+                                      : isDeadlinedPassed(
+                                                  homeworkdataList[index]
+                                                      .deadline) ==
+                                              "passed"
+                                          ? Colors.red
+                                          : Colors.black,
+                                  height: 1.3,
+                                ),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
@@ -150,8 +147,8 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
 
     final currentDate = DateTime.now();
 
-print(deadlinedDate);
-print(currentDate);
+    print(deadlinedDate);
+    print(currentDate);
     if (deadlinedDate.isSameDate(currentDate)) {
       return "same";
     } else if (deadlinedDate.compareTo(currentDate) <= 0) {
@@ -160,47 +157,46 @@ print(currentDate);
     return "none";
   }
 
-
-    void getCurrentClass() {
+  void getCurrentClass() {
     void changeTabSelection() {
       final weekDay = DateFormat('EEEE').format(DateTime.now());
-  
-  List<Routine> routineList = [];
-  switch (weekDay) {
-    case "Sunday":
-    routineList = sundayRoutine;
-    break;
-    case "Monday":
-    routineList = mondayRoutine;
-    break;
-    case "Tuesday":
-    routineList = tuesdayRoutine;
-    break;
-    case "Wednesday":
-    routineList = wednesdayRoutine;
-    break;
-    case "Thursday":
-    routineList = thursdayRoutine;
-    break;
-    case "Friday":
-    routineList = fridayRoutine;
-    break;
+
+      List<Routine> routineList = [];
+      switch (weekDay) {
+        case "Sunday":
+          routineList = sundayRoutine;
+          break;
+        case "Monday":
+          routineList = mondayRoutine;
+          break;
+        case "Tuesday":
+          routineList = tuesdayRoutine;
+          break;
+        case "Wednesday":
+          routineList = wednesdayRoutine;
+          break;
+        case "Thursday":
+          routineList = thursdayRoutine;
+          break;
+        case "Friday":
+          routineList = fridayRoutine;
+          break;
+      }
+
+      final time = DateFormat('kk:mm:ss').format(DateTime.now());
+      print(time);
+
+      // routineList.forEach((element) {
+      //  final classStartTime = DateTime.parse(element.startTime);//element.startTime;
+      //  print(classStartTime);
+      //  final classEndTime = element.endTime;
+      // });
+    }
   }
-
-  final time = DateFormat('kk:mm:ss').format(DateTime.now());
-  print(time);
-
-  // routineList.forEach((element) {
-  //  final classStartTime = DateTime.parse(element.startTime);//element.startTime; 
-  //  print(classStartTime);
-  //  final classEndTime = element.endTime;
-  // });
-  }}
 }
 
 extension DateOnlyCompare on DateTime {
   bool isSameDate(DateTime other) {
-    return year == other.year && month == other.month
-           && day == other.day;
+    return year == other.year && month == other.month && day == other.day;
   }
 }

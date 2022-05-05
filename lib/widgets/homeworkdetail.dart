@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Models/Homework.dart';
 import 'package:flutter_application_2/utils/Style.dart';
@@ -30,31 +28,38 @@ class _HomeworkdetailState extends State<homeworkdetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: stack(
+      body: Stack(
         children: <Widget>[
           // ignore: avoid_unnecessary_containers
           Container(
-              child:SfPdfViewer.asset('assets/pdf/' + widget.fileName + '.pdf')),
-          Material(
-            elevation: 5,
-            borderRadius: BorderRadius.circular(30),
-            color: Color.fromARGB(255, 103, 72, 109),
-            child: MaterialButton(
-                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                minWidth: MediaQuery.of(context).size.width,
-                onPressed: () {},
-                child: const Text(
-                  "Submit",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                )),
+              child:
+                  SfPdfViewer.asset('assets/pdf/' + widget.fileName + '.pdf')),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: double.infinity,
+              height: 30,
+              child: Material(
+                elevation: 5,
+                borderRadius: BorderRadius.circular(30),
+                color: Color.fromARGB(255, 103, 72, 109),
+                child: MaterialButton(
+                    padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    minWidth: MediaQuery.of(context).size.width,
+                    onPressed: () {},
+                    child: const Text(
+                      "Submit",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    )),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
-
 }
