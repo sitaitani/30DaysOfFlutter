@@ -1,3 +1,6 @@
+//import 'dart:html';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Models/Homework.dart';
 import 'package:flutter_application_2/utils/Style.dart';
@@ -35,18 +38,29 @@ class _HomeworkdetailState extends State<homeworkdetail> {
               child:
                   SfPdfViewer.asset('assets/pdf/' + widget.fileName + '.pdf')),
           Positioned(
-            bottom: 0,
+            bottom: 10,
+            left: 20,
+            right: 20,
             child: Container(
-              width: double.infinity,
-              height: 30,
+              width: MediaQuery.of(context).size.width,
+              height: 40,
               child: Material(
-                elevation: 5,
+                elevation: 0,
                 borderRadius: BorderRadius.circular(30),
                 color: Color.fromARGB(255, 103, 72, 109),
                 child: MaterialButton(
-                    padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                     minWidth: MediaQuery.of(context).size.width,
-                    onPressed: () {},
+                    onPressed: () {
+                      Future getPdfAndUpload(int position) async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['jpg', 'pdf', 'doc'],
+                        );
+                      }
+                    },
+
+                    // },
                     child: const Text(
                       "Submit",
                       textAlign: TextAlign.center,
