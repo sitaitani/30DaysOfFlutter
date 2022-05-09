@@ -51,13 +51,7 @@ class _HomeworkdetailState extends State<homeworkdetail> {
                 child: MaterialButton(
                     minWidth: MediaQuery.of(context).size.width,
                     onPressed: () {
-                      Future getPdfAndUpload(int position) async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles(
-                          type: FileType.custom,
-                          allowedExtensions: ['jpg', 'pdf', 'doc'],
-                        );
-                      }
+                      getPdfAndUpload(1);
                     },
 
                     // },
@@ -76,4 +70,12 @@ class _HomeworkdetailState extends State<homeworkdetail> {
       ),
     );
   }
+
+  Future getPdfAndUpload(int position) async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['jpg', 'pdf', 'doc'],
+                        );
+                      }
 }
