@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Models/teacher.dart';
 import 'package:flutter_application_2/widgets/teachersubject.dart';
 
+
 class teacherdashboard extends StatefulWidget {
   final List<Teacher> teachers = [
     Teacher("Yubaraj Devkota", [
@@ -40,8 +41,9 @@ class _teacherdashboardState extends State<teacherdashboard> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => teachersubject(widget.names[index].subjects)))
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      teachersubject(names: widget.teachers[index].subjects)))
             },
             child: Container(
               height: 70,
@@ -49,7 +51,7 @@ class _teacherdashboardState extends State<teacherdashboard> {
               color: Color.fromARGB(255, 206, 223, 218),
               child: Center(
                 child: Text(
-                  widget.teachers[index].name,
+                  widget.teachers[index].name + widget.names[index].semester,
                   style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
               ),
