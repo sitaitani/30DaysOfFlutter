@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Models/teacher.dart';
 import 'package:flutter_application_2/widgets/teachersubject.dart';
 
 class teacherdashboard extends StatefulWidget {
-  final List<String> names = <String>[
-    'Yubaraj Devkota'
-        'Kiran Poudel',
-    'Akhilesh Yadav',
-    'Bindo Paneru',
-    'Santosh Acharya',
+  final List<Teacher> teachers = [
+    Teacher("Yubaraj Devkota", [
+      Subject("Digital Logic", "1st semester"),
+      Subject("C Programming", "2nd semester"),
+      Subject("Advanced Java", "6th semester")
+    ]),
+    Teacher(" Kiran Poudel", [Subject("Mobile Programing", "6th semester")]),
+    Teacher("Akhilesh Yadav", [Subject("Distributed System", "6th semester")]),
+    Teacher("Santosh Acharya", [Subject("Applied Economics", "6th semester")]),
+    Teacher("Binod Paneru", [Subject("Network Programming", "6th semester")]),
   ];
+
   @override
   State<teacherdashboard> createState() => _teacherdashboardState();
 }
@@ -24,21 +30,28 @@ class _teacherdashboardState extends State<teacherdashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dashboard"),
+        title: Text("Dashboard",
+            style: TextStyle(
+              fontSize: 22,
+            )),
       ),
       body: ListView.builder(
-        itemCount: widget.names.length,
+        itemCount: widget.teachers.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => teachersubject()))
+                  MaterialPageRoute(builder: (context) => teachersubject(widget.names[index].subjects)))
             },
             child: Container(
               height: 70,
-              color: Colors.white,
-              child: const Center(
-                child: Text(widget.names[index]),
+              margin: EdgeInsets.all(2),
+              color: Color.fromARGB(255, 206, 223, 218),
+              child: Center(
+                child: Text(
+                  widget.teachers[index].name,
+                  style: TextStyle(fontSize: 25, color: Colors.black),
+                ),
               ),
             ),
           );
