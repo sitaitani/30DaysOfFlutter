@@ -25,6 +25,7 @@ class _teachersubjectState extends State<teachersubject> {
           "Subject",
           style: TextStyle(
             fontSize: 22,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -61,6 +62,7 @@ class _teachersubjectState extends State<teachersubject> {
                                             widget.names[index].name,
                                             style: TextStyle(
                                                 fontSize: 30,
+                                                fontWeight: FontWeight.bold,
                                                 color: Colors.black),
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 2,
@@ -78,18 +80,19 @@ class _teachersubjectState extends State<teachersubject> {
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: Column(
-                            CrossAxisAlignment.end,
-                            Text(
-                              "Semester" + widget.names[index].semester,
-                              style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 20.0,
-                                color: Colors.deepOrangeAccent,
-                              ),
+                        Container(
+                          width: double.infinity,
+                          child: Text(
+                            widget.names[index].semester,
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: Colors.deepOrangeAccent,
                             ),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
                           ),
                         ),
                       ],

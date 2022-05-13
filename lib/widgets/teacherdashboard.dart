@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Models/teacher.dart';
 import 'package:flutter_application_2/widgets/teachersubject.dart';
 
-
 class teacherdashboard extends StatefulWidget {
   final List<Teacher> teachers = [
     Teacher("Yubaraj Devkota", [
@@ -34,29 +33,37 @@ class _teacherdashboardState extends State<teacherdashboard> {
         title: Text("Dashboard",
             style: TextStyle(
               fontSize: 22,
+              fontWeight: FontWeight.bold,
             )),
       ),
       body: ListView.builder(
         itemCount: widget.teachers.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            onTap: () => {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      teachersubject(names: widget.teachers[index].subjects)))
-            },
-            child: Container(
-              height: 70,
-              margin: EdgeInsets.all(2),
-              color: Color.fromARGB(255, 206, 223, 218),
-              child: Center(
-                child: Text(
-                  widget.teachers[index].name ,
-                  style: TextStyle(fontSize: 25, color: Colors.black),
+              onTap: () => {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => teachersubject(
+                            names: widget.teachers[index].subjects)))
+                  },
+              child: Card(
+                  child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 10.0, right: 10.0, top: 20, bottom: 15),
+                child: Container(
+                  height: 70,
+                  margin: EdgeInsets.all(2),
+                  color: Colors.white10,
+                  child: Center(
+                    child: Text(
+                      widget.teachers[index].name,
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
+              )));
         },
       ),
     );
