@@ -51,7 +51,7 @@ class _teacherdashboardState extends State<teacherdashboard> {
               color: Color.fromARGB(255, 206, 223, 218),
               child: Center(
                 child: Text(
-                  widget.teachers[index].name + widget.names[index].semester,
+                  widget.teachers[index].name ,
                   style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
               ),
