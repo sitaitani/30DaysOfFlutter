@@ -38,7 +38,7 @@ dependencies:
   share_plus:
   webview_flutter:
   cloud_firestore: ^3.1.13
-  firebase_auth: ^3.3.15
+  firebase_auth: 
   firebase_core: ^1.15.0
   fluttertoast: ^8.0.9
   firebase_database: ^9.0.9
@@ -49,10 +49,10 @@ dependencies:
 
   school_ui_toolkit: ^5.0.0
 
-  syncfusion_flutter_pdf: 20.1.50-beta
+  syncfusion_flutter_pdf:
   path_provider: ^2.0.9
   open_file: ^3.2.1
-  syncfusion_flutter_pdfviewer: ^20.1.50-beta
+  syncfusion_flutter_pdfviewer:
   sqflite:
   intl:
 dev_dependencies:

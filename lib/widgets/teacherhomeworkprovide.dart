@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_ui_toolkit/school_ui_toolkit.dart';
 
 class teacherhomeworkprovid extends StatefulWidget {
   @override
@@ -17,32 +18,30 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovid> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Assignments"),
-        
       ),
       body: AssignmentCard(
-    // optional, if deadline is not passed, deadline card will not be shown
-    deadline: DateTime.now(),
-    question:
-        'Chapter 3 - Q.no 1 - Q.no 10 (Please submit in word format with names attached)',
-    subject: 'Mobile Programming',
-    teacher: 'Kiran Poudel',
-    deadlineBackgroundColor: Colors.red,
-    onUploadHandler: () {
-        print('Handle upload');
-        // optional, if null is passsed upload button will be hidden
-    },
-    // optional
-    fileList: [
-        FileWrapper(
+        // optional, if deadline is not passed, deadline card will not be shown
+        deadline: DateTime.now(),
+        question:
+            'Chapter 3 - Q.no 1 - Q.no 10 (Please submit in word format with names attached)',
+        subject: 'Mobile Programming',
+        teacher: 'Kiran Poudel',
+        deadlineBackgroundColor: Colors.red,
+        onUploadHandler: () {
+          print('Handle upload');
+          // optional, if null is passsed upload button will be hidden
+        },
+        // optional
+        fileList: [
+          FileWrapper(
             fileName: 'assignment-information.pdf',
             fileSize: '11.5 KB',
             onTap: () {
-            print('Handle on tap');
+              print('Handle on tap');
             },
-        ),
-    ],
-),
+          ),
+        ],
+      ),
     );
   }
 }
-
