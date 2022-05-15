@@ -1,46 +1,185 @@
 import 'package:flutter/material.dart';
-import 'package:school_ui_toolkit/school_ui_toolkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class teacherhomeworkprovid extends StatefulWidget {
+import 'package:intl/intl.dart';
+
+import '../Assignment.dart';
+import '../AssignmentImageViewer.dart';
+
+
+
+class teacherhomeworkprovide extends StatefulWidget {
+  teacherhomeworkprovide({this.assignment});
+  final Assignment assignment;
   @override
-  State<teacherhomeworkprovid> createState() => _teacherhomeworkprovideState();
+  _teacherhomeworkprovideState createState() =>
+      _teacherhomeworkprovideState();
 }
 
-class _teacherhomeworkprovideState extends State<teacherhomeworkprovid> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+class _teacherhomeworkprovideState
+    extends State<teacherhomeworkprovide> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Assignments"),
-      ),
-      body: AssignmentCard(
-        // optional, if deadline is not passed, deadline card will not be shown
-        deadline: DateTime.now(),
-        question:
-            'Chapter 3 - Q.no 1 - Q.no 10 (Please submit in word format with names attached)',
-        subject: 'Mobile Programming',
-        teacher: 'Kiran Poudel',
-        deadlineBackgroundColor: Colors.red,
-        onUploadHandler: () {
-          print('Handle upload');
-          // optional, if null is passsed upload button will be hidden
-        },
-        // optional
-        fileList: [
-          FileWrapper(
-            fileName: 'assignment-information.pdf',
-            fileSize: '11.5 KB',
-            onTap: () {
-              print('Handle on tap');
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        floatingActionButton: FloatingActionButton.extended(
+            isExtended: true,
+            label: Text('Read'),
+            onPressed: () async {
+              if (widget.assignment.type == 'PDF') {
+                kopenPage(
+                  context,
+                  PDFOpener(
+                    url: widget.assignment.url,
+                    title: widget.assignment.title,
+                  ),
+                );
+              } else {
+                kopenPage(
+                  context,
+                  AssignmentImageViewer(
+                    assignment: widget.assignment,
+                  ),
+                );
+              }
             },
+            icon: Icon(FontAwesomeIcons.arrowCircleUp)),
+        body: SingleChildScrollView(
+          child: Container(
+            margin:
+                const EdgeInsets.only(top: 40, left: 10, right: 10, bottom: 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  height: 40,
+                  child: Text(
+                    widget.assignment.title,
+                    style: ktitleStyle.copyWith(fontSize: 25),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 200,
+                  // color: Colors.blueAccent.withOpacity(0.5),
+                  child: TextField(
+                    maxLength: null,
+                    readOnly: true,
+                    // enabled: false,
+                    maxLines: 50,
+                    controller:
+                        TextEditingController(text: widget.assignment.details),
+                    // expands: true,
+                    keyboardType: TextInputType.multiline,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    decoration: kTextFieldDecoration.copyWith(
+                      hintText: string.description_optional,
+                      labelText: 'Description regarding the Assignment',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: TextEditingController(text: widget.assignment.by),
+                  enabled: false,
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: string.file_name,
+                    labelText: 'Uploaded By',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  enabled: false,
+                  controller:
+                      TextEditingController(text: widget.assignment.subject),
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Subject',
+                    labelText: 'Subject',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  enabled: false,
+                  controller: TextEditingController(
+                    text: DateFormat("MMM d, E").add_jm().format(DateTime.parse(
+                        widget.assignment.timeStamp
+                            .toDate()
+                            .toLocal()
+                            .toString())),
+                  ),
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Time',
+                    labelText: 'Time',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     Expanded(
+                //       child: TextField(
+                //         controller: TextEditingController(text: widget.assignment.standard),
+                //         keyboardType: TextInputType.number,
+                //         decoration: kTextFieldDecoration.copyWith(
+                //           hintText: string.standard,
+                //           labelText: string.standard,
+                //           border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       height: 10,
+                //     ),
+                //     Expanded(
+                //       child: TextField(
+                //         controller: TextEditingController(text: widget.assignment.div),
+                //         decoration: kTextFieldDecoration.copyWith(
+                //           labelText: string.division,
+                //           hintText: string.division,
+                //           border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
