@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/teacherhomeworkhistory.dart';
 import 'package:flutter_application_2/widgets/teacherdashboard.dart';
 
 import '../Models/teacher.dart';
@@ -33,7 +34,10 @@ class _teachersubjectState extends State<teachersubject> {
         itemCount: widget.names.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            onTap: () => {},
+            onTap: () => {
+              Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => teacherhomeworkhistory()))
+            },
             child: Card(
               child: Padding(
                   padding: const EdgeInsets.only(

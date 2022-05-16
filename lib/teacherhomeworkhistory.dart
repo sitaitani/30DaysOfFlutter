@@ -65,7 +65,8 @@ class _teacherhomeworkhistoryState extends State<teacherhomeworkhistory> {
                   child: MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       onPressed: () {
-                        teacherhomeworkprovide;
+                        Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => teacherhomeworkprovide()));
                       },
 
                       // },
