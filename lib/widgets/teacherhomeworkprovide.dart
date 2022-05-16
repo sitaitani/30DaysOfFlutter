@@ -1,184 +1,177 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:intl/intl.dart';
-
-import '../Assignment.dart';
-import '../AssignmentImageViewer.dart';
-
-
 
 class teacherhomeworkprovide extends StatefulWidget {
-  teacherhomeworkprovide({this.assignment});
-  final Assignment assignment;
+  const teacherhomeworkprovide({Key? key}) : super(key: key);
+
   @override
-  _teacherhomeworkprovideState createState() =>
-      _teacherhomeworkprovideState();
+  _teacherhomeworkprovideState createState() => _teacherhomeworkprovideState();
 }
 
-class _teacherhomeworkprovideState
-    extends State<teacherhomeworkprovide> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
+  String? errorMessage;
+
+  get changeButon => null;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        floatingActionButton: FloatingActionButton.extended(
-            isExtended: true,
-            label: Text('Read'),
-            onPressed: () async {
-              if (widget.assignment.type == 'PDF') {
-                kopenPage(
-                  context,
-                  PDFOpener(
-                    url: widget.assignment.url,
-                    title: widget.assignment.title,
-                  ),
-                );
-              } else {
-                kopenPage(
-                  context,
-                  AssignmentImageViewer(
-                    assignment: widget.assignment,
-                  ),
-                );
-              }
-            },
-            icon: Icon(FontAwesomeIcons.arrowCircleUp)),
-        body: SingleChildScrollView(
-          child: Container(
-            margin:
-                const EdgeInsets.only(top: 40, left: 10, right: 10, bottom: 10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 40,
-                  child: Text(
-                    widget.assignment.title,
-                    style: ktitleStyle.copyWith(fontSize: 25),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 200,
-                  // color: Colors.blueAccent.withOpacity(0.5),
-                  child: TextField(
-                    maxLength: null,
-                    readOnly: true,
-                    // enabled: false,
-                    maxLines: 50,
-                    controller:
-                        TextEditingController(text: widget.assignment.details),
-                    // expands: true,
-                    keyboardType: TextInputType.multiline,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.description_optional,
-                      labelText: 'Description regarding the Assignment',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: TextEditingController(text: widget.assignment.by),
-                  enabled: false,
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: string.file_name,
-                    labelText: 'Uploaded By',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  enabled: false,
-                  controller:
-                      TextEditingController(text: widget.assignment.subject),
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Subject',
-                    labelText: 'Subject',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  enabled: false,
-                  controller: TextEditingController(
-                    text: DateFormat("MMM d, E").add_jm().format(DateTime.parse(
-                        widget.assignment.timeStamp
-                            .toDate()
-                            .toLocal()
-                            .toString())),
-                  ),
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Time',
-                    labelText: 'Time',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: <Widget>[
-                //     Expanded(
-                //       child: TextField(
-                //         controller: TextEditingController(text: widget.assignment.standard),
-                //         keyboardType: TextInputType.number,
-                //         decoration: kTextFieldDecoration.copyWith(
-                //           hintText: string.standard,
-                //           labelText: string.standard,
-                //           border: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(10),
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       height: 10,
-                //     ),
-                //     Expanded(
-                //       child: TextField(
-                //         controller: TextEditingController(text: widget.assignment.div),
-                //         decoration: kTextFieldDecoration.copyWith(
-                //           labelText: string.division,
-                //           hintText: string.division,
-                //           border: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(10),
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                SizedBox(
-                  height: 100,
-                ),
-              ],
-            ),
+    var DetailEditingController;
+    return Container(
+      decoration: BoxDecoration(
+          // image: DecorationImage(
+          //image: AssetImage('assets/images/register.png'), fit: BoxFit.cover),
           ),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.teal,
+          title: Text("Upload Assignment"),
+          elevation: 0,
+        ),
+        body: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.only(left: 35, top: 25),
+            ),
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(top: 90),
+                //top: MediaQuery.of(context).size.height * 0.20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 35, right: 35),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black12,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Title",
+                                hintStyle: TextStyle(color: Colors.teal),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black12,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText:
+                                    "Some Description regarding the Assignment",
+                                hintStyle: TextStyle(color: Colors.teal),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black12,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Filename",
+                                hintStyle: TextStyle(color: Colors.teal),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black12,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Division",
+                                hintStyle: TextStyle(color: Colors.teal),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                          ),
+                          new Padding(
+                            padding: const EdgeInsets.only(top: 40.0),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Material(
+                            elevation: 5,
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color.fromARGB(255, 103, 72, 109),
+                            child: MaterialButton(
+                                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                minWidth: MediaQuery.of(context).size.width,
+                                onPressed: () {
+                                  //Icons.upload(EditingController.text,
+                                  // passwordEditingController.text);
+                                },
+                                child: Text(
+                                  "Upload",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
