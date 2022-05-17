@@ -65,8 +65,8 @@ class _teacherhomeworkhistoryState extends State<teacherhomeworkhistory> {
                   child: MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       onPressed: () {
-                        Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => teacherhomeworkprovide()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => teacherhomeworkprovide()));
                       },
 
                       // },
@@ -74,7 +74,7 @@ class _teacherhomeworkhistoryState extends State<teacherhomeworkhistory> {
                         "Add Assignment",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 27,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       )),

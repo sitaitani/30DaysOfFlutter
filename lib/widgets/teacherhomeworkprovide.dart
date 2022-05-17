@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class teacherhomeworkprovide extends StatefulWidget {
@@ -35,7 +36,7 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
             ),
             SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(top: 90),
+                padding: EdgeInsets.only(top: 50),
                 //top: MediaQuery.of(context).size.height * 0.20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,6 +69,8 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
                             height: 20,
                           ),
                           TextFormField(
+                            minLines: 5,
+                            maxLines: 6,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -90,7 +93,7 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
                                 )),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
                           TextFormField(
                             style: TextStyle(color: Colors.black),
@@ -114,7 +117,7 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
                                 )),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
                           TextFormField(
                             style: TextStyle(color: Colors.black),
@@ -139,10 +142,35 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
                                 )),
                           ),
                           new Padding(
-                            padding: const EdgeInsets.only(top: 40.0),
+                            padding: const EdgeInsets.only(top: 35.0),
                           ),
                           SizedBox(
                             height: 20,
+                          ),
+                          Material(
+                            elevation: 5,
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color.fromARGB(255, 103, 72, 109),
+                            child: MaterialButton(
+                                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                minWidth: MediaQuery.of(context).size.width,
+                                onPressed: () {
+                                  getPdfAndUpload(1);
+                                },
+                                child: Text(
+                                  "Select File",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
+                          new Padding(
+                            padding: const EdgeInsets.only(top: 40.0),
+                          ),
+                          SizedBox(
+                            height: 1,
                           ),
                           Material(
                             elevation: 5,
@@ -176,4 +204,11 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
       ),
     );
   }
+}
+
+Future getPdfAndUpload(int position) async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: ['jpg', 'pdf', 'doc'],
+  );
 }
