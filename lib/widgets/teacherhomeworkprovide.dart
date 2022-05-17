@@ -1,5 +1,7 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class teacherhomeworkprovide extends StatefulWidget {
   const teacherhomeworkprovide({Key? key}) : super(key: key);
@@ -14,6 +16,10 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
   get changeButon => null;
   final _formKey = GlobalKey<FormState>();
 
+  DateTime? selectedDate;
+
+  String? fileName;
+
   @override
   Widget build(BuildContext context) {
     var DetailEditingController;
@@ -26,44 +32,48 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.teal,
-          title: Text("Upload Assignment"),
+          title: Text("Upload New Assignment"),
           elevation: 0,
         ),
         body: Stack(
           children: [
-            Container(
-              padding: EdgeInsets.only(left: 35, top: 25),
-            ),
+           
             SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(top: 50),
+                padding: EdgeInsets.only(top: 20),
                 //top: MediaQuery.of(context).size.height * 0.20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 35, right: 35),
+                      margin: EdgeInsets.only(left: 10, right: 10),
                       child: Column(
-                        children: [
-                          TextFormField(
-                            style: TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.black12,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [            
+                      
+                          Container(
+                            height: 50,
+                            child: TextFormField(
+                              style: TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    borderSide: BorderSide(
+                                      color: Colors.black12,
+                                    ),
                                   ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                    ),
                                   ),
-                                ),
-                                hintText: "Title",
-                                hintStyle: TextStyle(color: Colors.teal),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                  hintText: "Title",
+                                  hintStyle: TextStyle(color: Colors.teal),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5))),
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -74,124 +84,142 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(5),
                                   borderSide: BorderSide(
                                     color: Colors.black12,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(5),
                                   borderSide: BorderSide(
                                     color: Colors.black,
                                   ),
                                 ),
                                 hintText:
-                                    "Some Description regarding the Assignment",
+                                    "Description (Optional)",
                                 hintStyle: TextStyle(color: Colors.teal),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(5),
                                 )),
                           ),
                           SizedBox(
                             height: 20,
                           ),
-                          TextFormField(
-                            style: TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.black12,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "Filename",
-                                hintStyle: TextStyle(color: Colors.teal),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                          ),
-                          SizedBox(
+                
+
+
+
+Container(
+  height: 40,
+  width: double.infinity,
+  child:   ElevatedButton(
+    style: ElevatedButton.styleFrom(primary: Colors.white, side: BorderSide(width: 1, color: Colors.black12)),
+    onPressed: () async {
+final date = DateTime.now() ;
+       final pickedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(date.year, date.month + 1, date.day));
+
+
+
+       if (pickedDate != null) {
+          setState(() {
+            selectedDate = pickedDate;
+          });
+       }
+    },
+    child: Row(
+
+      // mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(child: Text((selectedDate == null) ? 'Select Deadline' : "Deadline: " + DateFormat('yyyy-MM-dd').format(selectedDate!), style: TextStyle(fontSize: 18, color: Colors.black))), // <-- Text
+       
+        Icon( // <-- Icon
+          Icons.calendar_month,
+          size: 24.0,
+          color: Colors.black,
+        ),
+      ],
+    ),
+  ),
+),
+
+  SizedBox(
                             height: 20,
                           ),
-                          TextFormField(
-                            style: TextStyle(color: Colors.black),
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.black12,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "Division",
-                                hintStyle: TextStyle(color: Colors.teal),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                          ),
-                          new Padding(
-                            padding: const EdgeInsets.only(top: 35.0),
-                          ),
-                          SizedBox(
+
+/// Button
+  Row(
+    
+    children: [
+      Text("File:", style: TextStyle(fontSize: 18),),
+      SizedBox(width: 10,),
+      ElevatedButton(
+      style: ElevatedButton.styleFrom(primary: Colors.white, side: BorderSide(width: 1, color: Colors.black12)),
+      onPressed: () async {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: ['pdf'],
+      );
+      final abc = result?.files?.first?.name;
+ setState(() {
+              fileName = abc!;
+      });
+ 
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text( fileName == null ? 'Select File' : fileName!, style: TextStyle(fontSize: 18, color: Colors.black)), // <-- Text
+          SizedBox(
+            width: 5,
+          ),
+          Icon( // <-- Icon
+            Icons.file_present,
+            size: 24.0,
+            color: Colors.black,
+          ),
+        ],
+      ),
+),
+    ],
+  ),
+
+
+ SizedBox(
                             height: 20,
                           ),
-                          Material(
-                            elevation: 5,
-                            borderRadius: BorderRadius.circular(30),
-                            color: Color.fromARGB(255, 103, 72, 109),
-                            child: MaterialButton(
-                                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                                minWidth: MediaQuery.of(context).size.width,
-                                onPressed: () {
-                                  getPdfAndUpload(1);
-                                },
-                                child: Text(
-                                  "Select File",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ),
+
+                         
                           new Padding(
                             padding: const EdgeInsets.only(top: 40.0),
                           ),
                           SizedBox(
                             height: 1,
                           ),
-                          Material(
-                            elevation: 5,
-                            borderRadius: BorderRadius.circular(30),
-                            color: Color.fromARGB(255, 103, 72, 109),
-                            child: MaterialButton(
-                                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                                minWidth: MediaQuery.of(context).size.width,
-                                onPressed: () {
-                                  //Icons.upload(EditingController.text,
-                                  // passwordEditingController.text);
-                                },
-                                child: Text(
-                                  "Upload",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ),
+
+
+/// Button
+  Container(
+    height: 40,
+    width: double.infinity,
+    child: ElevatedButton(
+    style: ElevatedButton.styleFrom(primary: Colors.teal, side: BorderSide(width: 1, color: Colors.black12)),
+    onPressed: () {
+      //getPdfAndUpload(1);
+    },
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('Submit', style: TextStyle(fontSize: 18, color: Colors.white)), // <-- Text
+        SizedBox(
+          width: 5,
+        ),
+      ],
+    ),
+),
+  ),
+
+                          
                         ],
                       ),
                     )
@@ -206,9 +234,3 @@ class _teacherhomeworkprovideState extends State<teacherhomeworkprovide> {
   }
 }
 
-Future getPdfAndUpload(int position) async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: FileType.custom,
-    allowedExtensions: ['jpg', 'pdf', 'doc'],
-  );
-}
