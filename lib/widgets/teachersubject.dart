@@ -5,8 +5,9 @@ import 'package:flutter_application_2/widgets/teacherdashboard.dart';
 import '../Models/teacher.dart';
 
 class teachersubject extends StatefulWidget {
-  const teachersubject({Key? key, required this.names}) : super(key: key);
+  const teachersubject({Key? key, required this.names, required this.teacherId}) : super(key: key);
   final List<Subject> names;
+  final String teacherId;
   @override
   State<teachersubject> createState() => _teachersubjectState();
 }
@@ -16,6 +17,9 @@ class _teachersubjectState extends State<teachersubject> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    print("TEACHER ID");
+    print(widget.teacherId);
   }
 
   @override
@@ -36,7 +40,7 @@ class _teachersubjectState extends State<teachersubject> {
           return GestureDetector(
             onTap: () => {
               Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => teacherhomeworkhistory()))
+                    MaterialPageRoute(builder: (context) => teacherhomeworkhistory(teacherId: widget.teacherId, subjectId: widget.names[index].id,)))
             },
             child: Card(
               child: Padding(

@@ -7,6 +7,8 @@ import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/pages/register.dart';
 import 'package:flutter_application_2/utils/DatabaseHelper.dart';
 import 'package:flutter_application_2/utils/routes.dart';
+import 'package:flutter_application_2/widgets/homework.dart';
+import 'package:flutter_application_2/widgets/notification.dart';
 import 'package:flutter_application_2/widgets/teacherdashboard.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,6 +33,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+/// Subscribe to all
+FirebaseMessaging.instance.subscribeToTopic("all");
+
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await flutterLocalNotificationsPlugin
@@ -125,7 +131,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         "/": (context) => teacherdashboard(),
         MyRoutes.homeRoute: (context) => teacherdashboard(),
-        MyRoutes.loginRoute: (context) => teacherdashboard(),
+        MyRoutes.loginRoute: (context) => ListviewHomework(),
         MyRoutes.registerRoute: (context) => Myregister(),
         //MyRoutes.registerRoute: (context) => teacherdashboard()
       },

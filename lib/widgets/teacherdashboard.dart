@@ -4,15 +4,15 @@ import 'package:flutter_application_2/widgets/teachersubject.dart';
 
 class teacherdashboard extends StatefulWidget {
   final List<Teacher> teachers = [
-    Teacher("Yubaraj Devkota", [
-      Subject("Digital Logic", "1st semester"),
-      Subject("C Programming", "2nd semester"),
-      Subject("Advanced Java", "6th semester")
+    Teacher("Yubaraj Devkota", "1", [
+      Subject("Digital Logic", "1st semester", "0"),
+      Subject("C Programming", "2nd semester", "1"),
+      Subject("Advanced Java", "6th semester", "2")
     ]),
-    Teacher(" Kiran Poudel", [Subject("Mobile Programing", "6th semester")]),
-    Teacher("Akhilesh Yadav", [Subject("Distributed System", "6th semester")]),
-    Teacher("Santosh Acharya", [Subject("Applied Economics", "6th semester")]),
-    Teacher("Binod Paneru", [Subject("Network Programming", "6th semester")]),
+    Teacher(" Kiran Poudel", "2", [Subject("Mobile Programing", "6th semester", "3")]),
+    Teacher("Akhilesh Yadav", "3", [Subject("Distributed System", "6th semester", "4")]),
+    Teacher("Santosh Acharya", "4", [Subject("Applied Economics", "6th semester", "5")]),
+    Teacher("Binod Paneru", "5", [Subject("Network Programming", "6th semester", "6")]),
   ];
 
   @override
@@ -42,8 +42,8 @@ class _teacherdashboardState extends State<teacherdashboard> {
           return GestureDetector(
               onTap: () => {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => teachersubject(
-                            names: widget.teachers[index].subjects)))
+                        builder: (context) => teachersubject(teacherId: widget.teachers[index].id,
+                            names: widget.teachers[index].subjects),))
                   },
               child: Card(
                   child: Padding(

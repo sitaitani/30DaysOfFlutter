@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/utils/NotificationAPI.dart';
 // import 'package:flutter_application_2/utils/Constants.dart';
  import 'package:flutter_application_2/utils/Style.dart';
  import 'package:flutter_application_2/widgets/emptyWidget.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/material.dart';
 
  class _NotificationListState extends State<NotificationList> {
 
+  var isLoading = true;
+
    List<NotificationData> notificationList = [];
 
 
@@ -19,8 +22,17 @@ import 'package:flutter/material.dart';
    void initState() {
      // TODO: implement initState
      super.initState();
-     addNotification();
+     getDataFromDatabase();
+    //  addNotification();
    }
+
+void getDataFromDatabase() async {
+ List<NotificationData> list = await NotificationAPI().getNotifications();
+    setState(() {
+      isLoading = false;
+      notificationList = list;
+    }); 
+}
 
    void addNotification() {
      setState(() {
@@ -35,6 +47,7 @@ import 'package:flutter/material.dart';
          title: Text("Notification"),
        ),
        body: 
+isLoading ? Center(child: CircularProgressIndicator()) :
 
        notificationList.isEmpty ? Container( color: Colors.white, child: EmptyWidget("No Notifications", "All notifications will appear here.", "empty.jpg")) :
        Container(

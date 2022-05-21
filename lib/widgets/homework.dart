@@ -1,11 +1,17 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/utils/Constants.dart';
+import 'package:flutter_application_2/utils/NotificationAPI.dart';
 import 'package:flutter_application_2/utils/Style.dart';
 import 'package:flutter_application_2/widgets/homeworkdetail.dart';
 import 'package:flutter_application_2/widgets/routineTile.dart';
 import 'package:flutter_application_2/widgets/webview.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 import '../Models/Homework.dart';
 import 'emptyWidget.dart';
@@ -18,26 +24,42 @@ class ListviewHomework extends StatefulWidget {
 class _ListviewHomeworkState extends State<ListviewHomework> {
   List<HomeworkData> homeworkdataList = [];
 
+  var isLoading = true;
+
+
+  String? fileName;
+
+  PlatformFile? file;
+
   @override
   void initState() {
     getCurrentClass();
     // TODO: implement initState
     super.initState();
-    testHomeworkData();
+    //testHomeworkData();
+    getDataFromDatabase();
   }
 
-  void testHomeworkData() {
-    final testHomeworkData = [
-      HomeworkData("DL Assignment", "2022-04-20", "dlassignment"),
-      HomeworkData("web tech nccs old question", "2022-04-26",
-          "web_tech_nccs_old_question"),
-      HomeworkData("C Assignmnet ", "2022-04-29", "C_Assignments_updated"),
-      HomeworkData("AJP Exam Questions", "2022-05-03", "AJP_Exam_Questions"),
-    ];
-
+void getDataFromDatabase() async {
+ List<HomeworkData> list = await HomeworkAPI().getHomeworks();
     setState(() {
-      homeworkdataList = testHomeworkData;
-    });
+      isLoading = false;
+      homeworkdataList = list;
+    }); 
+}
+
+  void testHomeworkData() {
+    // final testHomeworkData = [
+    //   HomeworkData("DL Assignment", "2022-04-20", "dlassignment", "", ""),
+    //   HomeworkData("web tech nccs old question", "2022-04-26",
+    //       "web_tech_nccs_old_question", "", ""),
+    //   HomeworkData("C Assignmnet ", "2022-04-29", "C_Assignments_updated", "", ""),
+    //   HomeworkData("AJP Exam Questions", "2022-05-03", "AJP_Exam_Questions", "", ""),
+    // ];
+
+    // setState(() {
+    //   homeworkdataList = testHomeworkData;
+    // });
   }
 
   @override
@@ -46,12 +68,14 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
       appBar: AppBar(
         title: Text("Homework"),
       ),
-      body: homeworkdataList.isEmpty
+      body: 
+isLoading ? Center(child: CircularProgressIndicator()) :
+      homeworkdataList.isEmpty
           ? Container(
               color: Colors.white,
               child: EmptyWidget(
-                  "No Reading Materials",
-                  "Currently threre are no reading materials available.",
+                  "No Homeworks",
+                  "Currently threre are no homeworks available.",
                   "empty.jpg"))
           : Container(
               padding: EdgeInsets.all(8),
@@ -62,7 +86,7 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => homeworkdetail(
-                                  fileName: homeworkdataList[index].fileName,
+                                  homework: homeworkdataList[index],
                                 )));
                       },
                       child: Card(
@@ -193,6 +217,7 @@ class _ListviewHomeworkState extends State<ListviewHomework> {
       // });
     }
   }
+
 }
 
 extension DateOnlyCompare on DateTime {

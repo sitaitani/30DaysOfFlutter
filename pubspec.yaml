@@ -44,7 +44,7 @@ dependencies:
   firebase_database: ^9.0.9
   firebase_messaging: ^11.2.14
   flutter_local_notifications: ^9.4.1
-
+  firebase_storage: ^10.2.16
   file_picker: ^4.5.1
 
   font_awesome_flutter: ^10.1.0
@@ -52,6 +52,7 @@ dependencies:
   path_provider: ^2.0.9
   open_file: ^3.2.1
   syncfusion_flutter_pdfviewer: ^20.1.55-beta
+  uuid: ^3.0.6
   sqflite:
   intl:
 dev_dependencies:
